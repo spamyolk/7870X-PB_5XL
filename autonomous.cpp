@@ -6,14 +6,22 @@
 #include <thread>
 
 
+
+
 #include "../include/autonomous.h"
 #include "motor-control.h"
+
+
 
 
 // IMPORTANT: Remember to add respective function declarations to custom/include/autonomous.h
 // Call these functions from custom/include/user.cpp
 // Format: returnType functionName() { code }
 //color: 0 = default, 1 = red, 2 = blue
+
+
+
+
 
 
 
@@ -33,9 +41,13 @@ void exampleAuton() {
 }
 
 
+
+
 void Rightside() {
  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
  hood.set(false); //retracts hood
+
+
 
 
  //intake first 3 Blocks
@@ -44,6 +56,8 @@ void Rightside() {
  intake(-12, 12, 12); //runs intake(t)
  driveTo(16, 2000, true, 3.5);
  wait(250, msec);
+
+
 
 
  //scoring in middle
@@ -59,6 +73,8 @@ void Rightside() {
  hood.set(false);
 
 
+
+
  //intakes 3 Loader Blocks
  driveTo(-51, 5000, true, 6.5);
  correct_angle = normalizeTarget(-180); //updates heading
@@ -72,6 +88,8 @@ void Rightside() {
  wait(1300, msec);
 
 
+
+
  //scores in high + push
  driveTo(-30, 3000, true, 6.0);
  hood.set(true);
@@ -80,9 +98,13 @@ void Rightside() {
 }
 
 
+
+
 void Leftside() {
  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
  hood.set(false); //retracts hood
+
+
 
 
  //intake first 3 Blocks
@@ -93,11 +115,13 @@ void Leftside() {
  wait(250, msec);
 
 
+
+
  //scoring in middle
  correct_angle = normalizeTarget(-135); //updates heading
  driveTo(-17.75, 2000, true, 5.0);
- //hood.set(true); //opens hood for jams
- //wait(500, msec);
+ hood.set(true); //opens hood for jams
+ wait(500, msec);
  intake(-12, -12, -12);
  wait(600, msec);
  intake(-12, 12, -12); //runs intake(m)
@@ -106,17 +130,22 @@ void Leftside() {
  hood.set(false);
 
 
+
+
  //intakes 3 Loader Blocks
  driveTo(51, 5000, true, 6.5);
  correct_angle = normalizeTarget(-180); //updates heading
  driveTo(4, 2000, true, 6.0);
  fd1.set(true); //drops fd
  fd2.set(true);
+ hood.set(true);
  wait(500, msec);
  intake(-12, 12, 12); //runs intake(t)
  driveTo(12, 2000, false, 12.0);
- driveTo(-1.5, 1000);
- wait(1300, msec);
+ driveTo(-1.5, 800);
+ wait(1100, msec);
+
+
 
 
  //scores in high + push
@@ -127,9 +156,13 @@ void Leftside() {
 }
 
 
+
+
 void Skills() {
  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
  hood.set(false); //retracts hood
+
+
 
 
  driveTo(32, 3000, false, 10.0);
@@ -147,6 +180,8 @@ void Skills() {
  //turnToAngle(-90, 2000);
 
 
+
+
  //driveTo(-96, 8000, true, 8.0);
  //turnToAngle(-90, 2000);
  //driveTo(-12, 2500, 6.0);
@@ -154,11 +189,15 @@ void Skills() {
 }
 
 
+
+
 //color sorting?
 /*void colorGood(){
  optical_sensor.setLight(ledState::on);      // Turn on optical sensor light
  optical_sensor.setLightPower(100);          // Set light power to max
  int color1 = 0;
+
+
 
 
  while(true) {
@@ -174,7 +213,11 @@ void Skills() {
 }*/
 
 
+
+
 double arm_pid_target = 0, arm_load_target = 60, arm_store_target = 250, arm_score_target = 470;
+
+
 
 
 /*
@@ -185,7 +228,7 @@ double arm_pid_target = 0, arm_load_target = 60, arm_store_target = 250, arm_sco
 void armPID(double arm_target) {
  PID pidarm = PID(0.1, 0, 0.5); // Initialize PID controller for arm
  pidarm.setTarget(arm_target);   // Set target position
- pidarm.setIntegralMax(0); 
+ pidarm.setIntegralMax(0);
  pidarm.setIntegralRange(1);
  pidarm.setSmallBigErrorTolerance(1, 1);
  pidarm.setSmallBigErrorDuration(0, 0);
@@ -193,6 +236,8 @@ void armPID(double arm_target) {
  pidarm.setArrive(true);
  arm_motor.spin(fwd, pidarm.update(arm_motor.position(deg)), volt); // Apply PID output to arm motor
 }
+
+
 
 
 /*
@@ -207,6 +252,8 @@ void armPIDLoop() {
 }
 
 
+
+
 /*
 * rushClamp
 * Waits until the clamp distance sensor detects an object within 85mm, then closes the claw and lowers the rush arm.
@@ -219,6 +266,8 @@ void rushClamp() {
  claw.set(true);        // Close the claw to grab the goal
  rush_arm.set(false);   // Lower the rush arm
 }
+
+
 
 
 /*
@@ -236,6 +285,8 @@ void intakeThread(){
 }
 
 
+
+
 /*
 * redGoalRush
 * 2024-2025 World Championship runner-up(1698V) autonomous routine.
@@ -248,6 +299,8 @@ void redGoalRush() {
  arm_pid_target = arm_store_target;                   // Set arm PID target to store position
 
 
+
+
  thread al = thread(armPIDLoop);                      // Start arm PID loop in a thread
  thread rc = thread(rushClamp);                       // Start clamp routine in a thread
  intake_motor.spin(fwd, 12, volt);                    // Start intake motor at full speed
@@ -255,9 +308,13 @@ void redGoalRush() {
  rush_arm.set(true);                                  // Lower rush arm
 
 
+
+
  driveTo(33, 1100, true);                             // Drive forward to first goal
  moveToPoint(-2, 10, -1, 15000, false);               // Pull the goal back
  stopChassis(hold);                                   // Stop chassis and hold position
+
+
 
 
  rc.interrupt();                                      // Stop clamp thread (goal should be clamped)
@@ -266,13 +323,19 @@ void redGoalRush() {
  wait(100, msec);                                     // Brief pause
 
 
+
+
  correct_angle = normalizeTarget(-20);                // Adjust target heading for next maneuver
  driveTo(3, 800, true, 8);                            // Drive forward slightly
  driveTo(-5, 1000, true);                             // Back up
 
 
+
+
  rush_arm.set(false);                                 // Raise rush arm
  wait(200, msec);                                     // Wait for arm to raise
+
+
 
 
  turnToAngle(-90, 800, false);                        // Turn to face the goal backwards
@@ -282,8 +345,12 @@ void redGoalRush() {
  wait(100, msec);                                     // Wait for clamp
 
 
+
+
  it.interrupt();                                      // Stop intake thread (ring should be collected)
  intake_motor.spin(fwd, 12, volt);                    // Restart intake
+
+
 
 
  moveToPoint(1, 7, 1, 2000, true);                    // Move near corner to drop goal
@@ -293,10 +360,14 @@ void redGoalRush() {
  wait(300, msec);                                     // Wait for spin
 
 
+
+
  intake_motor.spin(fwd, -12, volt);                   // Reverse intake to push disc in front away
  moveToPoint(-13, -4, 1, 1500, false, 10);            // Move forward to push disc out of the way
  turnToAngle(180, 800, false);                        // Turn to clamp goal
  intake_motor.spin(fwd, 0, volt);                     // Stop intake
+
+
 
 
  moveToPoint(-31, 26, -1, 2000, false, 6);            // Move backwards into the next goal
@@ -305,9 +376,13 @@ void redGoalRush() {
  wait(100, msec);                                     // Wait for clamp
 
 
+
+
  turnToAngle(145, 300, true);                         // Turn to face corner
  moveToPoint(-4, -3, 1, 2000, false);                 // Move to corner
  intake_motor.spin(fwd, 12, volt);                    // Start intake
+
+
 
 
  correct_angle = normalizeTarget(135);                // Update heading for next maneuver
@@ -316,11 +391,17 @@ void redGoalRush() {
  driveTo(10, 2500, true, 3);                          // Drive forward to intake second corner ring
 
 
+
+
  wait(200, msec);                                     // Brief wait for intake
+
+
 
 
  moveToPoint(-11, 6, -1, 2000, false, 10);            // Move backward out of the corner
  turnToAngle(45, 400, true);                          // Turn to align for wallstake
+
+
 
 
  al.interrupt();                                      // Stop arm PID thread
@@ -328,11 +409,17 @@ void redGoalRush() {
  thread al2 = thread(armPIDLoop);                     // Start new arm PID thread
 
 
+
+
  moveToPoint(12, 34, 1, 1700, true, 8);               // Move forward to final wallstake scoring position
+
+
 
 
  al2.interrupt();                                     // Stop arm PID thread
  arm_motor.spin(fwd, 1, volt);                        // Spin arm forward slightly
+
+
 
 
  turnToAngle(40, 200);                                // Final turn for alignment
