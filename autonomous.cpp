@@ -45,51 +45,44 @@ void exampleAuton() {
 
 void Rightside() {
  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
- hood.set(false); //retracts hood
+  hood.set(false); //retracts hood
 
 
+ 
+  //intake first 3 Blocks
+  driveTo(12, 2000, false);
+  turnToAngle(90, 1000, true);
+  intake(-12, 12, 12); //runs intake(t)
+  driveTo(16, 2000, true, 3.5);
+  wait(250, msec);
 
 
- //intake first 3 Blocks
- driveTo(12, 2000, false);
- turnToAngle(90, 1000, true);
- intake(-12, 12, 12); //runs intake(t)
- driveTo(16, 2000, true, 3.5);
- wait(250, msec);
+ 
+  //scoring in middle
+  turnToAngle(-45, 2000, true, 10.0);
+  correct_angle = normalizeTarget(-45); //updates heading
+  driveTo(18, 2000, true, 5.0);
+  intake(12, 12, -12); //runs outtake
+  wait(1750, msec);
+  intake(0, 0, 0); //stops intake
 
 
-
-
- //scoring in middle
- correct_angle = normalizeTarget(-45); //updates heading
- driveTo(17.75, 2000, true, 5.0);
- //hood.set(true); //opens hood for jams
- //wait(500, msec);
- intake(-12, -12, -12);
- wait(600, msec);
- intake(-2, -12, -12); //runs intake(m)
- wait(1750, msec);
- intake(0, 0, 0); //stops intake
- hood.set(false);
-
-
-
-
- //intakes 3 Loader Blocks
- driveTo(-51, 5000, true, 6.5);
+ 
+  //intakes 3 Loader Blocks
+ driveTo(51, 5000, true, 6.5);
  correct_angle = normalizeTarget(-180); //updates heading
  driveTo(4, 2000, true, 6.0);
  fd1.set(true); //drops fd
  fd2.set(true);
+ hood.set(true);
  wait(500, msec);
  intake(-12, 12, 12); //runs intake(t)
  driveTo(12, 2000, false, 12.0);
- driveTo(-1.5, 1000);
- wait(1300, msec);
+ driveTo(-1.5, 800);
+ wait(1100, msec);
 
 
-
-
+ 
  //scores in high + push
  driveTo(-30, 3000, true, 6.0);
  hood.set(true);
