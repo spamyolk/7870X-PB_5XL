@@ -7,10 +7,10 @@
 
 
 void runAutonomous() {
- int auton_selected = 2;
+ int auton_selected = 3;
  switch(auton_selected) {
    case 1:
-     exampleAuton();
+     PID_test();
      break;
    case 2:
      Rightside();
@@ -18,11 +18,11 @@ void runAutonomous() {
    case 3:
      Leftside();
      break;
-   case 4:
-     Skills();
+   case 4;
+     SAWP();
      break;
-   case 5:
-     redGoalRush();
+   case 5;
+     Skills();
      break;
    case 6:
      break;
@@ -30,7 +30,8 @@ void runAutonomous() {
      break;
    case 8:
      break;
-   case 9:
+   case 9;
+     redGoalRush();
      break;
  }
 }
