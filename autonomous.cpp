@@ -44,7 +44,7 @@ void exampleAuton() {
 
 
 void Rightside() {
- correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
   hood.set(false); //retracts hood
 
 
@@ -53,99 +53,99 @@ void Rightside() {
   driveTo(12, 2000, false);
   turnToAngle(90, 1000, true);
   intake(-12, 12, 12); //runs intake(t)
-  driveTo(16, 2000, true, 3.5);
+  driveTo(17.75, 2000, true, 3.5);
   wait(250, msec);
 
 
  
-  //scoring in middle
+  //scoring in low
   turnToAngle(-45, 2000, true, 10.0);
   correct_angle = normalizeTarget(-45); //updates heading
-  driveTo(18, 2000, true, 5.0);
-  intake(12, 12, -12); //runs outtake
-  wait(1750, msec);
+  driveTo(17, 2000, true, 5.0);
+  intake(12, -12, -12); //runs outtake
+  wait(1500, msec);
   intake(0, 0, 0); //stops intake
 
 
  
   //intakes 3 Loader Blocks
- driveTo(51, 5000, true, 6.5);
- correct_angle = normalizeTarget(-180); //updates heading
- driveTo(4, 2000, true, 6.0);
- fd1.set(true); //drops fd
- fd2.set(true);
- hood.set(true);
- wait(500, msec);
- intake(-12, 12, 12); //runs intake(t)
- driveTo(12, 2000, false, 12.0);
- driveTo(-1.5, 800);
- wait(1100, msec);
+  driveTo(-51, 5000, true, 6.5);
+  turnToAngle(-180, 2000);
+  correct_angle = normalizeTarget(-180); //updates heading
+  driveTo(4, 2000, true, 6.0);
+  fd1.set(true); //drops fd
+  fd2.set(true);
+  hood.set(true);
+  wait(500, msec);
+  intake(-12, 12, 12); //runs intake(t)
+  driveTo(12, 2000, false, 12.0);
+  driveTo(-1, 800);
+  wait(1100, msec);
 
 
- 
- //scores in high + push
- driveTo(-30, 3000, true, 6.0);
- hood.set(true);
- fd1.set(false);
- fd2.set(false);
+  
+  //scores in high + push
+  driveTo(-30, 3000, true, 6.0);
+  hood.set(true);
+  fd1.set(false);
+  fd2.set(false);
 }
 
 
 
 
 void Leftside() {
- correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
- hood.set(false); //retracts hood
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  hood.set(false); //retracts hood
 
 
 
 
- //intake first 3 Blocks
- driveTo(12, 2000, false);
- turnToAngle(-90, 1000, true);
- intake(-12, 12, 12); //runs intake(t)
- driveTo(16, 2000, true, 3.5);
- wait(250, msec);
+  //intake first 3 Blocks
+  driveTo(12, 2000, false);
+  turnToAngle(-90, 1000, true);
+  intake(-12, 12, 12); //runs intake(t)
+  driveTo(17, 2000, true, 3.5);
+  wait(250, msec);
 
 
 
 
- //scoring in middle
- correct_angle = normalizeTarget(-135); //updates heading
- driveTo(-17.75, 2000, true, 5.0);
- hood.set(true); //opens hood for jams
- wait(500, msec);
- intake(-12, -12, -12);
- wait(600, msec);
- intake(-12, 12, -12); //runs intake(m)
- wait(1750, msec);
- intake(0, 0, 0); //stops intake
- hood.set(false);
+  //scoring in middle
+  correct_angle = normalizeTarget(-135); //updates heading
+  driveTo(-17.75, 2000, true, 5.0);
+  intake(-12, -12, -12);
+  hood.set(true); //opens hood for jams
+  wait(600, msec);
+  intake(-12, 12, -12); //runs intake(m)
+  wait(1750, msec);
+  intake(0, 0, 0); //stops intake
+  hood.set(false);
 
 
 
 
- //intakes 3 Loader Blocks
- driveTo(51, 5000, true, 6.5);
- correct_angle = normalizeTarget(-180); //updates heading
- driveTo(4, 2000, true, 6.0);
- fd1.set(true); //drops fd
- fd2.set(true);
- hood.set(true);
- wait(500, msec);
- intake(-12, 12, 12); //runs intake(t)
- driveTo(12, 2000, false, 12.0);
- driveTo(-1.5, 800);
- wait(1100, msec);
+  //intakes 3 Loader Blocks
+  driveTo(51, 5000, true, 6.5);
+  correct_angle = normalizeTarget(-180); //updates heading
+  driveTo(4, 2000, true, 6.0);
+  fd1.set(true); //drops fd
+  fd2.set(true);
+  hood.set(true);
+  wait(500, msec);
+  intake(-12, 12, 12); //runs intake(t)
+  driveTo(12.25, 2000, false, 12.0);
+  driveTo(-1, 800);
+  wait(1000, msec);
 
 
 
 
- //scores in high + push
- driveTo(-30, 3000, true, 6.0);
- hood.set(true);
- fd1.set(false);
- fd2.set(false);
+  //scores in high + push
+  driveTo(-30, 3000, true, 6.0);
+  hood.set(true);
+  fd1.set(false);
+  fd2.set(false);
 }
 
 
@@ -153,32 +153,57 @@ void Leftside() {
 
 void Skills() {
  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
- hood.set(false); //retracts hood
+  hood.set(false); //retracts hood
 
 
 
 
- driveTo(32, 3000, false, 10.0);
- turnToAngle(90, 2000, true, 10.0);
- //fd1.set(true);
- //fd2.set(true);
- //wait(300, msec);
- //intake(-12, 12, 12);
- //driveTo(12, 2000, false, 12.0);
- //driveTo(-1.5, 1000);
- //wait(2000, msec);
- //driveTo(-12, 3000, true, 6.0);
- //turnToAngle(-45, 2000);
- //driveTo(-8, 2000);
- //turnToAngle(-90, 2000);
+  //intake first 3 Blocks
+  driveTo(12, 2000, false);
+  turnToAngle(-90, 1000, true);
+  intake(-12, 12, 12); //runs intake(t)
+  driveTo(20, 2000, true, 3.5);
+  driveTo(-3, 2000, true, 3.5);
+  wait(250, msec);
 
 
 
 
- //driveTo(-96, 8000, true, 8.0);
- //turnToAngle(-90, 2000);
- //driveTo(-12, 2500, 6.0);
- //hood.set
+  //scoring in middle
+  correct_angle = normalizeTarget(-135); //updates heading
+  driveTo(-17.75, 2000, true, 5.0);
+  intake(-12, -12, -12);
+  hood.set(true); //opens hood for jams
+  wait(600, msec);
+  intake(-12, 12, -12); //runs intake(m)
+  wait(1750, msec);
+  intake(0, 0, 0); //stops intake
+  hood.set(false);
+
+
+
+
+  //intakes 3 Loader Blocks
+  driveTo(51, 5000, true, 6.5);
+  correct_angle = normalizeTarget(-180); //updates heading
+  driveTo(4, 2000, true, 6.0);
+  fd1.set(true); //drops fd
+  fd2.set(true);
+  hood.set(true);
+  wait(500, msec);
+  intake(-12, 12, 12); //runs intake(t)
+  driveTo(12.25, 2000, false, 12.0);
+  driveTo(-1, 800);
+  wait(1100, msec);
+
+
+
+
+  //scores in high + push
+  driveTo(-30, 3000, true, 6.0);
+  hood.set(true);
+  fd1.set(false);
+  fd2.set(false);
 }
 
 
@@ -286,6 +311,7 @@ void intakeThread(){
 * This routine executes a complex sequence to rush, grab, and score mobile goals and rings.
 * It uses multiple threads for simultaneous arm, clamp, and intake control.
 */
+
 void redGoalRush() {
  arm_motor.setPosition(arm_load_target, deg);         // Set arm to load position
  correct_angle = inertial_sensor.rotation();          // Sync correct_angle with inertial sensor
