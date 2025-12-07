@@ -5,13 +5,8 @@
 #include <cmath>
 #include <thread>
 
-
-
-
 #include "../include/autonomous.h"
 #include "motor-control.h"
-
-
 
 
 // IMPORTANT: Remember to add respective function declarations to custom/include/autonomous.h
@@ -19,20 +14,16 @@
 // Format: returnType functionName() { code }
 //color: 0 = default, 1 = red, 2 = blue
 
-
-
-
-
-
-
-
-void exampleAuton() {
+void PID_test() {
  // Use this for tuning linear and turn pid
  driveTo(24, 2000);
- wait(0.5, sec);
+ wait(1, sec);
  turnToAngle(90, 800);
+ wait(0.5, sec);
  turnToAngle(180, 800);
+ wait(0.5, sec);
  turnToAngle(270, 8000);
+ wait(0.5, sec);
  turnToAngle(360, 800);
  wait(0.5, sec);
  turnToAngle(0, 2000);
@@ -40,173 +31,91 @@ void exampleAuton() {
  driveTo(-24, 2000);
 }
 
-
-
-
 void Rightside() {
-  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  hood.set(false); //retracts hood
-
-
+ correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+ hood.set(false); //retracts hood
  
-  //intake first 3 Blocks
-  driveTo(12, 2000, false);
-  turnToAngle(90, 1000, true);
-  intake(-12, 12, 12); //runs intake(t)
-  driveTo(17.75, 2000, true, 3.5);
-  wait(250, msec);
-
-
+ //intake first 3 Blocks
+ driveTo(12, 2000, false);
+ turnToAngle(90, 1000, true);
+ intake(-12, 12, 12); //runs intake(t)
+ driveTo(17.75, 2000, true, 3.5);
+ wait(250, msec);
  
-  //scoring in low
-  turnToAngle(-45, 2000, true, 10.0);
-  correct_angle = normalizeTarget(-45); //updates heading
-  driveTo(17, 2000, true, 5.0);
-  intake(12, -12, -12); //runs outtake
-  wait(1500, msec);
-  intake(0, 0, 0); //stops intake
+ //scoring in low
+ turnToAngle(-45, 2000, true, 10.0);
+ correct_angle = normalizeTarget(-45); //updates heading
+ driveTo(17, 2000, true, 5.0);
+ intake(12, -12, -12); //runs outtake
+ wait(1500, msec);
+ intake(0, 0, 0); //stops intake
 
-
+ //intakes 3 Loader Blocks
+ driveTo(-51, 5000, true, 6.5);
+ turnToAngle(-180, 2000);
+ correct_angle = normalizeTarget(-180); //updates heading
+ driveTo(4, 2000, true, 6.0);
+ fd1.set(true); //drops fd
+ fd2.set(true);
+ hood.set(true);
+ wait(500, msec);
+ intake(-12, 12, 12); //runs intake(t)
+ driveTo(12, 2000, false, 12.0);
+ driveTo(-1, 800);
+ wait(1100, msec);
  
-  //intakes 3 Loader Blocks
-  driveTo(-51, 5000, true, 6.5);
-  turnToAngle(-180, 2000);
-  correct_angle = normalizeTarget(-180); //updates heading
-  driveTo(4, 2000, true, 6.0);
-  fd1.set(true); //drops fd
-  fd2.set(true);
-  hood.set(true);
-  wait(500, msec);
-  intake(-12, 12, 12); //runs intake(t)
-  driveTo(12, 2000, false, 12.0);
-  driveTo(-1, 800);
-  wait(1100, msec);
-
-
-  
-  //scores in high + push
-  driveTo(-30, 3000, true, 6.0);
-  hood.set(true);
-  fd1.set(false);
-  fd2.set(false);
+ //scores in high + push
+ driveTo(-30, 3000, true, 6.0);
+ hood.set(true);
+ fd1.set(false);
+ fd2.set(false);
 }
-
-
-
 
 void Leftside() {
-  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  hood.set(false); //retracts hood
+ correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+ hood.set(false); //retracts hood
 
+ //intake first 3 Blocks
+ driveTo(12, 2000, false);
+ turnToAngle(-90, 1000, true);
+ intake(-12, 12, 12); //runs intake(t)
+ driveTo(17, 2000, true, 3.5);
+ wait(250, msec);
 
+ //scoring in middle
+ correct_angle = normalizeTarget(-135); //updates heading
+ driveTo(-17.75, 2000, true, 5.0);
+ intake(-12, -12, -12);
+ hood.set(true); //opens hood for jams
+ wait(600, msec);
+ intake(-12, 12, -12); //runs intake(m)
+ wait(1750, msec);
+ intake(0, 0, 0); //stops intake
+ hood.set(false);
 
+ //intakes 3 Loader Blocks
+ driveTo(51, 5000, true, 6.5);
+ correct_angle = normalizeTarget(-180); //updates heading
+ driveTo(4, 2000, true, 6.0);
+ fd1.set(true); //drops fd
+ fd2.set(true);
+ hood.set(true);
+ wait(500, msec);
+ intake(-12, 12, 12); //runs intake(t)
+ driveTo(12.25, 2000, false, 12.0);
+ driveTo(-1, 800);
+ wait(1000, msec);
 
-  //intake first 3 Blocks
-  driveTo(12, 2000, false);
-  turnToAngle(-90, 1000, true);
-  intake(-12, 12, 12); //runs intake(t)
-  driveTo(17, 2000, true, 3.5);
-  wait(250, msec);
-
-
-
-
-  //scoring in middle
-  correct_angle = normalizeTarget(-135); //updates heading
-  driveTo(-17.75, 2000, true, 5.0);
-  intake(-12, -12, -12);
-  hood.set(true); //opens hood for jams
-  wait(600, msec);
-  intake(-12, 12, -12); //runs intake(m)
-  wait(1750, msec);
-  intake(0, 0, 0); //stops intake
-  hood.set(false);
-
-
-
-
-  //intakes 3 Loader Blocks
-  driveTo(51, 5000, true, 6.5);
-  correct_angle = normalizeTarget(-180); //updates heading
-  driveTo(4, 2000, true, 6.0);
-  fd1.set(true); //drops fd
-  fd2.set(true);
-  hood.set(true);
-  wait(500, msec);
-  intake(-12, 12, 12); //runs intake(t)
-  driveTo(12.25, 2000, false, 12.0);
-  driveTo(-1, 800);
-  wait(1000, msec);
-
-
-
-
-  //scores in high + push
-  driveTo(-30, 3000, true, 6.0);
-  hood.set(true);
-  fd1.set(false);
-  fd2.set(false);
+ //scores in high + push
+ driveTo(-30, 3000, true, 6.0);
+ hood.set(true);
+ fd1.set(false);
+ fd2.set(false);
 }
-
-
-
 
 void Skills() {
- correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  hood.set(false); //retracts hood
-
-
-
-
-  //intake first 3 Blocks
-  driveTo(12, 2000, false);
-  turnToAngle(-90, 1000, true);
-  intake(-12, 12, 12); //runs intake(t)
-  driveTo(20, 2000, true, 3.5);
-  driveTo(-3, 2000, true, 3.5);
-  wait(250, msec);
-
-
-
-
-  //scoring in middle
-  correct_angle = normalizeTarget(-135); //updates heading
-  driveTo(-17.75, 2000, true, 5.0);
-  intake(-12, -12, -12);
-  hood.set(true); //opens hood for jams
-  wait(600, msec);
-  intake(-12, 12, -12); //runs intake(m)
-  wait(1750, msec);
-  intake(0, 0, 0); //stops intake
-  hood.set(false);
-
-
-
-
-  //intakes 3 Loader Blocks
-  driveTo(51, 5000, true, 6.5);
-  correct_angle = normalizeTarget(-180); //updates heading
-  driveTo(4, 2000, true, 6.0);
-  fd1.set(true); //drops fd
-  fd2.set(true);
-  hood.set(true);
-  wait(500, msec);
-  intake(-12, 12, 12); //runs intake(t)
-  driveTo(12.25, 2000, false, 12.0);
-  driveTo(-1, 800);
-  wait(1100, msec);
-
-
-
-
-  //scores in high + push
-  driveTo(-30, 3000, true, 6.0);
-  hood.set(true);
-  fd1.set(false);
-  fd2.set(false);
+ 
 }
-
-
 
 
 //color sorting?
@@ -231,12 +140,8 @@ void Skills() {
 }*/
 
 
-
-
+//1689V HS code/functions
 double arm_pid_target = 0, arm_load_target = 60, arm_store_target = 250, arm_score_target = 470;
-
-
-
 
 /*
 * armPID
@@ -255,9 +160,6 @@ void armPID(double arm_target) {
  arm_motor.spin(fwd, pidarm.update(arm_motor.position(deg)), volt); // Apply PID output to arm motor
 }
 
-
-
-
 /*
 * armPIDLoop
 * Continuously runs the arm PID control in a separate thread, keeping the arm at the target position.
@@ -268,9 +170,6 @@ void armPIDLoop() {
    wait(10, msec);
  }
 }
-
-
-
 
 /*
 * rushClamp
@@ -284,9 +183,6 @@ void rushClamp() {
  claw.set(true);        // Close the claw to grab the goal
  rush_arm.set(false);   // Lower the rush arm
 }
-
-
-
 
 /*
 * intakeThread
@@ -302,9 +198,6 @@ void intakeThread(){
  intake_motor.stop(hold);                    // Stop intake motor and hold
 }
 
-
-
-
 /*
 * redGoalRush
 * 2024-2025 World Championship runner-up(1698V) autonomous routine.
@@ -317,45 +210,27 @@ void redGoalRush() {
  correct_angle = inertial_sensor.rotation();          // Sync correct_angle with inertial sensor
  arm_pid_target = arm_store_target;                   // Set arm PID target to store position
 
-
-
-
  thread al = thread(armPIDLoop);                      // Start arm PID loop in a thread
  thread rc = thread(rushClamp);                       // Start clamp routine in a thread
  intake_motor.spin(fwd, 12, volt);                    // Start intake motor at full speed
  thread it = thread(intakeThread);                    // Start intake sensor thread
  rush_arm.set(true);                                  // Lower rush arm
 
-
-
-
  driveTo(33, 1100, true);                             // Drive forward to first goal
  moveToPoint(-2, 10, -1, 15000, false);               // Pull the goal back
  stopChassis(hold);                                   // Stop chassis and hold position
-
-
-
 
  rc.interrupt();                                      // Stop clamp thread (goal should be clamped)
  rush_arm.set(true);                                  // Lower rush arm again (ensure down)
  claw.set(false);                                     // Open claw to release goal
  wait(100, msec);                                     // Brief pause
 
-
-
-
  correct_angle = normalizeTarget(-20);                // Adjust target heading for next maneuver
  driveTo(3, 800, true, 8);                            // Drive forward slightly
  driveTo(-5, 1000, true);                             // Back up
 
-
-
-
  rush_arm.set(false);                                 // Raise rush arm
  wait(200, msec);                                     // Wait for arm to raise
-
-
-
 
  turnToAngle(-90, 800, false);                        // Turn to face the goal backwards
  moveToPoint(0, 26, -1, 2000, false, 6);              // Move backwards into the goal
@@ -363,14 +238,8 @@ void redGoalRush() {
  mogo_mech.set(true);                                 // Clamp mobile goal
  wait(100, msec);                                     // Wait for clamp
 
-
-
-
  it.interrupt();                                      // Stop intake thread (ring should be collected)
  intake_motor.spin(fwd, 12, volt);                    // Restart intake
-
-
-
 
  moveToPoint(1, 7, 1, 2000, true);                    // Move near corner to drop goal
  turnToAngle(-90, 350, true);                         // Turn to drop goal
@@ -378,68 +247,38 @@ void redGoalRush() {
  driveChassis(-4, 4);                                 // Turn a bit to align with next target
  wait(300, msec);                                     // Wait for spin
 
-
-
-
  intake_motor.spin(fwd, -12, volt);                   // Reverse intake to push disc in front away
  moveToPoint(-13, -4, 1, 1500, false, 10);            // Move forward to push disc out of the way
  turnToAngle(180, 800, false);                        // Turn to clamp goal
  intake_motor.spin(fwd, 0, volt);                     // Stop intake
-
-
-
 
  moveToPoint(-31, 26, -1, 2000, false, 6);            // Move backwards into the next goal
  driveChassis(-1.5, -1.5);                            // Slowly drive backward for alignment
  mogo_mech.set(true);                                 // Clamp mobile goal
  wait(100, msec);                                     // Wait for clamp
 
-
-
-
  turnToAngle(145, 300, true);                         // Turn to face corner
  moveToPoint(-4, -3, 1, 2000, false);                 // Move to corner
  intake_motor.spin(fwd, 12, volt);                    // Start intake
-
-
-
 
  correct_angle = normalizeTarget(135);                // Update heading for next maneuver
  driveTo(1000, 1500, false, 4);                       // Drive forward infinitely until timeout
  driveTo(-13, 2000, true, 6);                         // Back up
  driveTo(10, 2500, true, 3);                          // Drive forward to intake second corner ring
 
-
-
-
  wait(200, msec);                                     // Brief wait for intake
-
-
-
 
  moveToPoint(-11, 6, -1, 2000, false, 10);            // Move backward out of the corner
  turnToAngle(45, 400, true);                          // Turn to align for wallstake
-
-
-
 
  al.interrupt();                                      // Stop arm PID thread
  arm_pid_target = arm_score_target - 100;             // Set arm to scoring position
  thread al2 = thread(armPIDLoop);                     // Start new arm PID thread
 
-
-
-
  moveToPoint(12, 34, 1, 1700, true, 8);               // Move forward to final wallstake scoring position
-
-
-
 
  al2.interrupt();                                     // Stop arm PID thread
  arm_motor.spin(fwd, 1, volt);                        // Spin arm forward slightly
-
-
-
 
  turnToAngle(40, 200);                                // Final turn for alignment
  driveChassis(1, 1);                                  // Slow drive forward
