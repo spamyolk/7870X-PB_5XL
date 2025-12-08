@@ -114,7 +114,27 @@ void Leftside() {
 }
 
 void SAWP() {
- 
+ correct_angle = inertial_sensor.rotation(); //inertial calibration
+ hood.set(false); //retracts hood
+
+ //intake 3 Blocks
+ moveToPoint(22, 30, 1, 3000); //test needed
+ fd1.set(true);
+ fd2.set(true);
+ intake(-12, 12, 12); //runs intake(t)
+ driveTo(100, 2000);
+ driveTo(-1, 1000);
+ wait(500, msec);
+
+ //score 4 Blocks
+ driveTo(-30, 3000, true, 8.0);
+ hood.set(true);
+ fd1.set(false);
+ fd2.set(false);
+ wait(500, msec);
+
+ //intake 6 Blocks
+ //either swing or mTP
 }
 
 void Skills() {
