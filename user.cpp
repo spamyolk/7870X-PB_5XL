@@ -18,10 +18,10 @@ void runAutonomous() {
    case 3:
      Leftside();
      break;
-   case 4;
+   case 4:
      SAWP();
      break;
-   case 5;
+   case 5:
      Skills();
      break;
    case 6:
@@ -30,7 +30,7 @@ void runAutonomous() {
      break;
    case 8:
      break;
-   case 9;
+   case 9:
      redGoalRush();
      break;
  }
