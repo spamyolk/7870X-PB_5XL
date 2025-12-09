@@ -32,43 +32,35 @@ void PID_test() {
 }
 
 void Rightside() {
- correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
- hood.set(false); //retracts hood
- 
- //intake first 3 Blocks
- driveTo(12, 2000, false);
- turnToAngle(90, 1000, true);
- intake(-12, 12, 12); //runs intake(t)
- driveTo(17.75, 2000, true, 3.5);
- wait(250, msec);
- 
- //scoring in low
- turnToAngle(-45, 2000, true, 10.0);
- correct_angle = normalizeTarget(-45); //updates heading
- driveTo(17, 2000, true, 5.0);
- intake(12, -12, -12); //runs outtake
- wait(1500, msec);
- intake(0, 0, 0); //stops intake
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  hood.set(false); //retracts hood
 
- //intakes 3 Loader Blocks
- driveTo(-51, 5000, true, 6.5);
- turnToAngle(-180, 2000);
- correct_angle = normalizeTarget(-180); //updates heading
- driveTo(4, 2000, true, 6.0);
- fd1.set(true); //drops fd
- fd2.set(true);
- hood.set(true);
- wait(500, msec);
- intake(-12, 12, 12); //runs intake(t)
- driveTo(12, 2000, false, 12.0);
- driveTo(-1, 800);
- wait(1100, msec);
- 
- //scores in high + push
- driveTo(-30, 3000, true, 6.0);
- hood.set(true);
- fd1.set(false);
- fd2.set(false);
+  driveTo(35, 3000, true, 10.0);
+  turnToAngle(90, 2000);
+  fd1.set(true);
+  fd2.set(true);
+  intake(-12, 12, 12);
+  wait(500, msec);
+
+  driveTo(13.5, 2500);
+  driveTo(-1, 2000, true, 5.0);
+  wait(900, msec);
+
+  driveTo(-10, 3000, true, 10.0);
+  fd1.set(false);
+  fd2.set(false);
+  wait(500, msec);
+  driveTo(-20, 3000, true, 10.0);
+  wait(200, msec);
+  hood.set(true);
+  wait(3000, msec);
+
+  driveTo(10, 2000, true, 8.0);
+  hood.set(false);
+  wait(500, msec);
+  driveChassis(-12.0, -12.0);
+  wait(500, msec);
+  stopChassis();
 }
 
 void Leftside() {
