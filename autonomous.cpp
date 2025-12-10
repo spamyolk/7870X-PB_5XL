@@ -42,8 +42,9 @@ void Rightside() {
   intake(-12, 12, 12);
   wait(500, msec);
 
-  driveTo(13.5, 2500);
-  driveTo(-1, 2000, true, 5.0);
+  driveTo(13.75, 2500);
+  driveTo(-1, 1000, true, 5.0);
+  driveTo(1,1000,true,5.0);
   wait(900, msec);
 
   driveTo(-10, 3000, true, 10.0);
@@ -53,7 +54,7 @@ void Rightside() {
   driveTo(-20, 3000, true, 10.0);
   wait(200, msec);
   hood.set(true);
-  wait(3000, msec);
+  wait(2000, msec);
 
   driveTo(10, 2000, true, 8.0);
   hood.set(false);
@@ -103,30 +104,48 @@ void Leftside() {
  hood.set(true);
  fd1.set(false);
  fd2.set(false);
+
+ 
 }
 
 void SAWP() {
- correct_angle = inertial_sensor.rotation(); //inertial calibration
- hood.set(false); //retracts hood
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  hood.set(false); //retracts hood
 
- //intake 3 Blocks
- moveToPoint(22, 30, 1, 3000); //test needed
- fd1.set(true);
- fd2.set(true);
- intake(-12, 12, 12); //runs intake(t)
- driveTo(100, 2000);
- driveTo(-1, 1000);
- wait(500, msec);
+  //drive to loader
+  driveTo(35, 3000, true, 10.0);
+  turnToAngle(90, 2000);
+  fd1.set(true);
+  fd2.set(true);
+  intake(-12, 12, 12);
+  wait(400, msec);
 
- //score 4 Blocks
- driveTo(-30, 3000, true, 8.0);
- hood.set(true);
- fd1.set(false);
- fd2.set(false);
- wait(500, msec);
+  //collect 3B
+  driveTo(12.5, 2000);
+  driveTo(-1, 1000);
+  wait(700, msec); //900
 
- //intake 6 Blocks
- //either swing or mTP
+  //score 4B
+  driveTo(-30, 3000, true, 10.0);
+  fd1.set(false);
+  fd2.set(false);
+  hood.set(true);
+  wait(1900, msec);
+  driveTo(12, 3000, true, 12.0);
+  hood.set(false);
+  driveChassis(-12, -12);
+  wait(300, msec);
+
+  //score low goal
+  swing(227, 1, 3000);
+  driveTo(24, 3000, true, 3.0); //2.0
+  wait(700, msec);
+  driveTo(10, 3000, true, 3.0);
+  intake(12, -12, -12);
+
+  // score mid goal
+  //swing(210, -1, 2000);
+  //driveTo(-12, 2000, true, 6.0);
 }
 
 void Skills() {
