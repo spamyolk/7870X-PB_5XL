@@ -63,7 +63,7 @@ void Rightside() {
   swing(227, 1, 2000);
   driveTo(24, 3000, true, 3.0); //2.0
   wait(300, msec);
-  driveTo(10, 3000, true, 3.0);
+  driveTo(11, 3000, true, 3.0);
   intake(12, -12, -12);
 }
 
@@ -110,7 +110,7 @@ void Leftside() {
 }
 
 void SAWP() {
-  
+
 }
 
 void Skills() {
@@ -127,23 +127,39 @@ void Skills() {
   wait(400, msec);
 
   //collect 3B
-  driveTo(12.5, 2000);
+  driveChassis(11, 11);
+  wait(300, msec);
   driveTo(-1, 1000);
-  wait(3000, msec); //900
+  wait(2000, msec);
 
   //score 4B
-  driveTo(-30, 3000, true, 10.0);
+  driveTo(-29, 3000, true, 10.0);
   fd1.set(false);
   fd2.set(false);
   hood.set(true);
-  wait(5000, msec);
-  driveTo(8, 3000, true, 12.0);
-  turnToAngle(180, 2000);
-  driveTo(8, 2000);
-  turnToAngle(270, 2000);
-  wing.set(false);
-  driveTo(16, 3000);
+  wait(2290, msec);
+  driveTo(12, 3000, true, 12.0);
+  hood.set(false);
+  driveChassis(-4, -4);
+  wait(1500, msec);
+
+  //score low goal
+  driveTo(1,50, true, 4.0);
+  swing(227, 1, 2000);
+  driveTo(24, 3000, true, 2.0); //2.0
+  wait(300, msec);
+  driveTo(11, 3000, true, 3.0);
+  intake(12, -12, -12);
+  wait(2500, msec);
+
+  //clear blocks in parking
+  driveTo(-12, 3000, true, 6.0);
+  turnToAngle(-90, 500);
+  driveTo(-32, 2000, true, 8.0);
+  swing(0, -1, 2000);
+  driveTo(-12, 2000)
 }
+
 
 //color sorting?
 /*void colorGood(){
