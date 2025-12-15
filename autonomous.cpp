@@ -72,7 +72,7 @@ void Leftside() {
  hood.set(false); //retracts hood
 
  //intake first 3 Blocks
- driveTo(12, 2000, false);
+ driveTo(13, 2000, false);
  turnToAngle(-90, 1000, true);
  intake(-12, 12, 12); //runs intake(t)
  driveTo(17, 2000, true, 3.5);
@@ -90,23 +90,28 @@ void Leftside() {
  hood.set(false);
 
  //intakes 3 Loader Blocks
- driveTo(51, 5000, true, 6.5);
+ driveTo(50, 5000, true, 7);
  correct_angle = normalizeTarget(-180); //updates heading
  driveTo(4, 2000, true, 6.0);
  fd1.set(true); //drops fd
  fd2.set(true);
  wait(500, msec);
  intake(-12, 12, 12); //runs intake(t)
- driveChassis(12, 12);
+ driveChassis(11, 11);
  wait(500, msec);
- driveTo(-1, 1000);
- wait(1000, msec);
+ driveTo(-1.2, 1000);
+ wait(800, msec);
 
- //scores in high + push
- driveTo(-30, 3000, true, 6.0);
- hood.set(true);
- fd1.set(false);
- fd2.set(false);
+  //scores in high + push
+  driveTo(-30, 3000, true, 6.0);
+  hood.set(true);
+  fd1.set(false);
+  fd2.set(false);
+  wait(2500, msec);
+  driveTo(6, 1000, true, 12.0);
+  hood.set(false);
+  driveChassis(-10, -10);
+  wait(300, msec);
 }
 
 void SAWP() {
@@ -116,48 +121,52 @@ void SAWP() {
 void Skills() {
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
   wing.set(true);
-  hood.set(false); //retracts hood
+  wing.set(false);
+
 
   //drive to loader
-  driveTo(35, 3000, true, 10.0);
-  turnToAngle(90, 2000);
-  fd1.set(true);
-  fd2.set(true);
-  intake(-12, 12, 12);
-  wait(400, msec);
+  //driveTo(35, 3000, true, 10.0);
+  //turnToAngle(90, 2000);
+  //fd1.set(true);
+  //fd2.set(true);
+  //intake(-12, 12, 12);
+  //wait(400, msec);
 
   //collect 3B
-  driveChassis(11, 11);
-  wait(300, msec);
-  driveTo(-1, 1000);
-  wait(2000, msec);
+  //driveChassis(11, 11);
+  //wait(350, msec);
+  //driveTo(-1, 1000);
+  //wait(2000, msec);
 
   //score 4B
-  driveTo(-29, 3000, true, 10.0);
-  fd1.set(false);
-  fd2.set(false);
-  hood.set(true);
-  wait(2290, msec);
-  driveTo(12, 3000, true, 12.0);
-  hood.set(false);
-  driveChassis(-4, -4);
-  wait(1500, msec);
+  //driveTo(-30, 3000, true, 8.0);
+  //intake(12, -12, -12);
+  //wait(300, msec);
+  //intake(-12, 12, 12);
+  //fd1.set(false);
+  //fd2.set(false);
+  //hood.set(true);
+  //wait(3290, msec);
+  //driveTo(12, 3000, true, 12.0);
+  //hood.set(false);
+  //driveChassis(-5, -5);
+  //wait(1500, msec);
 
   //score low goal
-  driveTo(1,50, true, 4.0);
-  swing(227, 1, 2000);
-  driveTo(24, 3000, true, 2.0); //2.0
-  wait(300, msec);
-  driveTo(11, 3000, true, 3.0);
-  intake(12, -12, -12);
-  wait(2500, msec);
+  //driveTo(1,50, true, 4.0);
+  //swing(227, 1, 2000);
+  //driveTo(24, 3000, true, 2.0); //2.0
+  //wait(300, msec);
+  //driveTo(11, 3000, true, 3.0);
+  //intake(12, -12, -12);
+  //wait(2500, msec);
 
   //clear blocks in parking
-  driveTo(-12, 3000, true, 6.0);
-  turnToAngle(-90, 500);
-  driveTo(-32, 2000, true, 8.0);
-  swing(0, -1, 2000);
-  driveTo(-12, 2000)
+  //driveTo(-12, 3000, true, 6.0);
+  //turnToAngle(-90, 500);
+  //driveTo(-32, 2000, true, 8.0);
+  //swing(0, -1, 2000);
+  //driveTo(-22, 2000);
 }
 
 
