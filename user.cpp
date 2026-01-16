@@ -1,41 +1,38 @@
 #include "vex.h"
 #include "motor-control.h"
 #include "../custom/include/autonomous.h"
-
+#include "../custom/include/robot-config.h"
 
 // Modify autonomous, driver, or pre-auton code below
 
-
 void runAutonomous() {
- int auton_selected = 3;
- switch(auton_selected) {
-   case 1:
-     PID_test();
-     break;
-   case 2:
-     Rightside();
-     break; 
-   case 3:
-     Leftside();
-     break;
-   case 4:
-     SAWP();
-     break;
-   case 5:
-     Skills();
-     break;
-   case 6:
-     break;
-   case 7:
-     break;
-   case 8:
-     break;
-   case 9:
-     redGoalRush();
-     break;
- }
+  int auton_selected = 3;
+  switch(auton_selected) {
+    case 1:
+      PID_test();
+      break;
+    case 2:
+      Rightside();
+      break;  
+    case 3:
+      Leftside();
+      break;
+    case 4:
+      SAWP();
+      break; 
+    case 5:
+      Skills();
+      break;
+    case 6:
+      break;
+    case 7:
+      break;
+    case 8:
+      break;
+    case 9:
+      break;
+  }
 }
-
 
 // controller_1 input variables (snake_case)
 int ch1, ch2, ch3, ch4;
@@ -43,7 +40,6 @@ bool l1, l2, r1, r2;
 bool button_a, button_b, button_x, button_y;
 bool button_up_arrow, button_down_arrow, button_left_arrow, button_right_arrow;
 int chassis_flag = 0;
-
 
 int colorGood(){
  optical_sensor.setLight(ledState::on);      // Turn on optical sensor light
@@ -64,7 +60,7 @@ int colorGood(){
 
 
 void runDriver() {
- stopChassis(coast);
+  stopChassis(coast);
  heading_correction = false;
  //other personal vars
  int driver_selected = 3;
@@ -262,31 +258,30 @@ void runDriver() {
  }
 }
 
-
 void runPreAutonomous() {
-   // Initializing Robot Configuration. DO NOT REMOVE!
- vexcodeInit();
+    // Initializing Robot Configuration. DO NOT REMOVE!
+  vexcodeInit();
+  
   // Calibrate inertial sensor
- inertial_sensor.calibrate();
+  inertial_sensor.calibrate();
 
+  // Wait for the Inertial Sensor to calibrate
+  while (inertial_sensor.isCalibrating()) {
+    wait(10, msec);
+  }
 
- // Wait for the Inertial Sensor to calibrate
- while (inertial_sensor.isCalibrating()) {
-   wait(10, msec);
- }
-
-
- double current_heading = inertial_sensor.heading();
- Brain.Screen.print(current_heading);
+  double current_heading = inertial_sensor.heading();
+  Brain.Screen.print(current_heading);
+  
   // odom tracking
- resetChassis();
- if(using_horizontal_tracker && using_vertical_tracker) {
-   thread odom = thread(trackXYOdomWheel);
- } else if (using_horizontal_tracker) {
-   thread odom = thread(trackXOdomWheel);
- } else if (using_vertical_tracker) {
-   thread odom = thread(trackYOdomWheel);
- } else {
-   thread odom = thread(trackNoOdomWheel);
- }
+  resetChassis();
+  if(using_horizontal_tracker && using_vertical_tracker) {
+    thread odom = thread(trackXYOdomWheel);
+  } else if (using_horizontal_tracker) {
+    thread odom = thread(trackXOdomWheel);
+  } else if (using_vertical_tracker) {
+    thread odom = thread(trackYOdomWheel);
+  } else {
+    thread odom = thread(trackNoOdomWheel);
+  }
 }
