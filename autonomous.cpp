@@ -14,20 +14,23 @@
 //color: 0 = default, 1 = red, 2 = blue
 
 void PID_test() {
- // Use this for tuning linear and turn pid
+ // Use this for tuning linear
  driveTo(24, 2000);
- wait(1, sec);
- turnToAngle(90, 800);
- wait(0.5, sec);
- turnToAngle(180, 800);
- wait(0.5, sec);
- turnToAngle(270, 8000);
- wait(0.5, sec);
- turnToAngle(360, 800);
- wait(0.5, sec);
- turnToAngle(0, 2000);
- wait(0.5, sec);
+ wait(2, sec);
  driveTo(-24, 2000);
+ //Use this for tuning turn
+ /*
+ turnToAngle(90, 800);
+ wait(1, sec);
+ turnToAngle(180, 800);
+ wait(1, sec);
+ turnToAngle(270, 8000);
+ wait(1, sec);
+ turnToAngle(360, 800);
+ wait(1, sec);
+ turnToAngle(0, 2000);
+ wait(1, sec);
+ */
 }
 
 void Rightside() {
