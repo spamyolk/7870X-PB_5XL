@@ -40,8 +40,7 @@ void Rightside() {
   //drive to loader
   driveTo(35, 3000, true, 10.0);
   turnToAngle(90, 2000);
-  fd1.set(true);
-  fd2.set(true);
+  fd.set(true);
   intake(-12, 12, 12);
   wait(400, msec);
 
@@ -52,8 +51,7 @@ void Rightside() {
 
   //score 4B
   driveTo(-30, 3000, true, 10.0);
-  fd1.set(false);
-  fd2.set(false);
+  fd.set(false);
   hood.set(true);
   wait(1900, msec);
   driveTo(12, 3000, true, 12.0);
@@ -95,8 +93,7 @@ void Leftside() {
  driveTo(50, 5000, true, 7);
  correct_angle = normalizeTarget(-180); //updates heading
  driveTo(4, 2000, true, 6.0);
- fd1.set(true); //drops fd
- fd2.set(true);
+ fd.set(true);
  wait(500, msec);
  intake(-12, 12, 12); //runs intake(t)
  driveChassis(11, 11);
@@ -107,8 +104,7 @@ void Leftside() {
   //scores in high + push
   driveTo(-30, 3000, true, 6.0);
   hood.set(true);
-  fd1.set(false);
-  fd2.set(false);
+  fd.set(false);
   wait(2500, msec);
   driveTo(6, 1000, true, 12.0);
   hood.set(false);
@@ -129,8 +125,7 @@ void Skills() {
   //drive to loader
   //driveTo(35, 3000, true, 10.0);
   //turnToAngle(90, 2000);
-  //fd1.set(true);
-  //fd2.set(true);
+  //fd.set(true);
   //intake(-12, 12, 12);
   //wait(400, msec);
 
@@ -145,8 +140,7 @@ void Skills() {
   //intake(12, -12, -12);
   //wait(300, msec);
   //intake(-12, 12, 12);
-  //fd1.set(false);
-  //fd2.set(false);
+  //fd.set(false);
   //hood.set(true);
   //wait(3290, msec);
   //driveTo(12, 3000, true, 12.0);
