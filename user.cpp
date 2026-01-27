@@ -139,11 +139,9 @@ void runDriver() {
 
 
    if (b_toggleState) {
-     fd1.set(true);
-     fd2.set(true);
+     fd.set(true);
    } else {
-     fd1.set(false);
-     fd2.set(false);
+     fd.set(false);
    }
 
 
