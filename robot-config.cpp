@@ -22,20 +22,19 @@ motor left_chassis3 = motor(PORT14, ratio6_1, true);
 motor_group left_chassis = motor_group(left_chassis1, left_chassis2, left_chassis3);
 motor right_chassis1 = motor(PORT16, ratio6_1, false);
 motor right_chassis2 = motor(PORT18, ratio6_1, false);
-motor right_chassis3 = motor(PORT6, ratio6_1, false);
+motor right_chassis3 = motor(PORT2, ratio6_1, false);
 motor_group right_chassis = motor_group(right_chassis1, right_chassis2, right_chassis3);
 
 // game specific devices for push back
-motor intake_motor1 = motor(PORT5, ratio6_1, false);
-motor intake_motor2 = motor(PORT3, ratio18_1, false);
+motor intake_motor1 = motor(PORT10, ratio6_1, false);
+motor intake_motor2 = motor(PORT6, ratio18_1, false);
 motor intake_motor3 = motor(PORT1, ratio18_1, false);
 optical optical_sensor = optical(PORT9);
 inertial inertial_sensor = inertial(PORT21);
-digital_out fd1 = digital_out(Brain.ThreeWirePort.A);
-digital_out fd2 = digital_out(Brain.ThreeWirePort.C);
+digital_out fd = digital_out(Brain.ThreeWirePort.E);
 digital_out double_park = digital_out(Brain.ThreeWirePort.D);
-digital_out hood = digital_out(Brain.ThreeWirePort.F);
-digital_out wing = digital_out(Brain.ThreeWirePort.H);
+digital_out hood = digital_out(Brain.ThreeWirePort.A);
+digital_out wing = digital_out(Brain.ThreeWirePort.C);
 
 // Format is rotation(port, reversed)
 // just set these to random ports if you don't use tracking wheels
@@ -101,9 +100,9 @@ double vertical_tracker_diameter = 1.975; // Diameter of the vertical tracker wh
 // All values should be positive numbers
 // If you are not using all four distance sensors, just set the unused ones to 0
 // If you are not using distance resets these values will be ignored
-double front_sensor_offset = 0.0;
-double left_sensor_offset = 0.0;
-double right_sensor_offset = 0.0;
+double front_sensor_offset = 0.0; //
+double left_sensor_offset = 0.0; //
+double right_sensor_offset = 0.0; 
 double back_sensor_offset = 0.0;
 
 // ============================================================================
