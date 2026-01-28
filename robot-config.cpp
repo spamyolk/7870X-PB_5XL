@@ -20,16 +20,15 @@ motor left_chassis1 = motor(PORT8, ratio6_1, true);
 motor left_chassis2 = motor(PORT12, ratio6_1, true);
 motor left_chassis3 = motor(PORT14, ratio6_1, true);
 motor_group left_chassis = motor_group(left_chassis1, left_chassis2, left_chassis3);
-motor right_chassis1 = motor(PORT16, ratio6_1, false);
+motor right_chassis1 = motor(PORT2, ratio6_1, false);
 motor right_chassis2 = motor(PORT18, ratio6_1, false);
-motor right_chassis3 = motor(PORT2, ratio6_1, false);
+motor right_chassis3 = motor(PORT16, ratio6_1, false);
 motor_group right_chassis = motor_group(right_chassis1, right_chassis2, right_chassis3);
 
 // game specific devices for push back
 motor intake_motor1 = motor(PORT10, ratio6_1, false);
-motor intake_motor2 = motor(PORT6, ratio18_1, false);
+motor intake_motor2 = motor(PORT9, ratio18_1, false);
 motor intake_motor3 = motor(PORT1, ratio18_1, false);
-optical optical_sensor = optical(PORT9);
 inertial inertial_sensor = inertial(PORT21);
 digital_out fd = digital_out(Brain.ThreeWirePort.E);
 digital_out double_park = digital_out(Brain.ThreeWirePort.D);
