@@ -16,18 +16,18 @@ controller controller_1 = controller(primary);
 // gearSetting is one of the following: ratio36_1(red), ratio18_1(green), ratio6_1(blue)
 // all chassis motors should be reversed appropriately so that they spin vertical when given a positive voltage input
 // such as driveChassis(12, 12)
-motor left_chassis1 = motor(PORT8, ratio6_1, true);
-motor left_chassis2 = motor(PORT12, ratio6_1, true);
-motor left_chassis3 = motor(PORT14, ratio6_1, true);
+motor left_chassis1 = motor(PORT14, ratio6_1, true); //port14
+motor left_chassis2 = motor(PORT12, ratio6_1, true); //port12
+motor left_chassis3 = motor(PORT8, ratio6_1, true); //port8
 motor_group left_chassis = motor_group(left_chassis1, left_chassis2, left_chassis3);
-motor right_chassis1 = motor(PORT2, ratio6_1, false);
-motor right_chassis2 = motor(PORT18, ratio6_1, false);
-motor right_chassis3 = motor(PORT16, ratio6_1, false);
+motor right_chassis1 = motor(PORT17, ratio6_1, false); //17-16 bad
+motor right_chassis2 = motor(PORT19, ratio6_1, false); //19-18 bad
+motor right_chassis3 = motor(PORT2, ratio6_1, false); //2
 motor_group right_chassis = motor_group(right_chassis1, right_chassis2, right_chassis3);
 
 // game specific devices for push back
-motor intake_motor1 = motor(PORT10, ratio6_1, false);
-motor intake_motor2 = motor(PORT9, ratio18_1, false);
+motor intake_motor1 = motor(PORT10, ratio6_1, true);
+motor intake_motor2 = motor(PORT9, ratio18_1, true);
 motor intake_motor3 = motor(PORT1, ratio18_1, false);
 inertial inertial_sensor = inertial(PORT21);
 digital_out fd = digital_out(Brain.ThreeWirePort.E);
@@ -54,7 +54,7 @@ motor_group arm_motor = motor_group(arm_motor1, arm_motor2);
 motor intake_motor = motor(PORT18, ratio18_1, true);
 digital_out claw = digital_out(Brain.ThreeWirePort.B);
 digital_out rush_arm = digital_out(Brain.ThreeWirePort.C);
-optical optical_sensor = optical(PORT19);
+optical optical_sensor = optical(PORT3);
 distance intake_distance = distance(PORT20);
 distance clamp_distance = distance(PORT21);
 digital_out mogo_mech = digital_out(Brain.ThreeWirePort.D);
@@ -73,7 +73,8 @@ double wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 // distance_* : Linear PID for straight driving
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
-double distance_kp = 1.1, distance_ki = 0.1, distance_kd = 7;
+//kp=1.1, ki-.1,kd=7
+double distance_kp = .9, distance_ki = 0.1, distance_kd = 7;
 double turn_kp = 0.3, turn_ki = 0, turn_kd = 2.5;
 double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 4;
 
