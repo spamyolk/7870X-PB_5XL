@@ -15,22 +15,22 @@
 
 void PID_test() {
  // Use this for tuning linear
- driveTo(24, 2000);
- wait(2, sec);
- driveTo(-24, 2000);
+ //driveTo(24, 2000);
+ //wait(2, sec);
+ //driveTo(-24, 2000);
  //Use this for tuning turn
- /*
- turnToAngle(90, 800);
+ 
+ turnToAngle(90, 2000);
  wait(1, sec);
- turnToAngle(180, 800);
+ turnToAngle(180, 2000);
  wait(1, sec);
- turnToAngle(270, 8000);
+ turnToAngle(270, 2000);
  wait(1, sec);
- turnToAngle(360, 800);
+ turnToAngle(360, 2000);
  wait(1, sec);
  turnToAngle(0, 2000);
  wait(1, sec);
- */
+ 
 }
 
 void Rightside() {
@@ -113,7 +113,44 @@ void Leftside() {
 }
 
 void SAWP() {
+  //drive to loader
+  //wing.set(true);
+  intake(-12, 12, 12);
+  driveTo(8, 1000);
+  driveTo(-34.5, 2000);
+  fd.set(true);
+  turnToAngle(-90, 1000);
 
+  //collect 3B
+  driveTo(11.5, 950, true, 10.0);
+  //wait(100, msec); 
+
+  //score 4B
+  driveTo(-21.5, 1500);
+  fd.set(false);
+  hood.set(true);
+  intake(12, -12, -12);
+  wait(50, msec);
+  intake(-12, 12, 12);
+  wait(800, msec);
+  hood.set(false);
+
+  //score low goal
+  swing(45, 1, 850);
+  driveTo(11, 3000, true, 8.0);
+  fd.set(true);
+  wait(300, msec);
+  fd.set(false);
+  driveTo(14, 3000, true, 8.0); //2.0
+  intake(8, -8, -8);
+  wait(200, msec);
+
+  //score mid goal
+  driveTo(6, 2000, false);
+  turnToAngle(-5,1000);
+  //driveTo(48, 2000);
+
+  
 }
 
 void Skills() {
