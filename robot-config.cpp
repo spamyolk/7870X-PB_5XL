@@ -30,10 +30,10 @@ motor intake_motor1 = motor(PORT10, ratio6_1, true);
 motor intake_motor2 = motor(PORT9, ratio18_1, true);
 motor intake_motor3 = motor(PORT1, ratio18_1, false);
 inertial inertial_sensor = inertial(PORT21);
-digital_out fd = digital_out(Brain.ThreeWirePort.E);
+digital_out fd = digital_out(Brain.ThreeWirePort.A);
 digital_out double_park = digital_out(Brain.ThreeWirePort.D);
-digital_out hood = digital_out(Brain.ThreeWirePort.A);
-digital_out wing = digital_out(Brain.ThreeWirePort.C);
+digital_out hood = digital_out(Brain.ThreeWirePort.C);
+digital_out wing = digital_out(Brain.ThreeWirePort.E);
 
 // Format is rotation(port, reversed)
 // just set these to random ports if you don't use tracking wheels
@@ -73,9 +73,10 @@ double wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 // distance_* : Linear PID for straight driving
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
-//kp=1.1, ki-.1,kd=7
-double distance_kp = .9, distance_ki = 0.1, distance_kd = 7;
-double turn_kp = 0.3, turn_ki = 0, turn_kd = 2.5;
+//kp=.865, ki-.1,kd=7
+
+double distance_kp = .69, distance_ki = 0, distance_kd = 3.5;
+double turn_kp = 0.134, turn_ki = 0.0007, turn_kd = 0.53;
 double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 4;
 
 // Enable or disable the use of tracking wheels
