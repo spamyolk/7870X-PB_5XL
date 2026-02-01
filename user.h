@@ -6,3 +6,4 @@ void Leftside();
 void Rightside();
 void SAWP();
 void Skills();
+void Elims();
