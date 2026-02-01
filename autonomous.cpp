@@ -40,21 +40,21 @@ void Rightside() {
 
   //drive to loader
   intake(-12, 12, 12);
-  driveTo(35, 2000);
+  driveTo(23, 2000);
   fd.set(true);
   turnToAngle(90, 1000);
 
   //collect 3B
-  driveTo(11.5, 950, true, 10.0);
+  driveTo(13, 950, true, 11.0);
 
   //score 4B
-  driveTo(-21.5, 1500);
+  driveTo(-22, 1500);
   fd.set(false);
   hood.set(true);
   intake(12, -12, -12);
   wait(50, msec);
   intake(-12, 12, 12);
-  wait(900, msec);
+  wait(1000, msec);
   hood.set(false);
 
   //score mid-low goal
@@ -74,21 +74,21 @@ void Leftside() {
 
   //drive to loader
   intake(-12, 12, 12);
-  driveTo(35, 2000);
+  driveTo(23, 2000);
   fd.set(true);
   turnToAngle(-90, 1000);
 
   //collect 3B
-  driveTo(11.5, 950, true, 10.0);
+  driveTo(13, 950, true, 11.0);
 
   //score 4B
-  driveTo(-21.5, 1500);
+  driveTo(-22, 1500);
   fd.set(false);
   hood.set(true);
   intake(12, -12, -12);
   wait(50, msec);
   intake(-12, 12, 12);
-  wait(900, msec);
+  wait(1000, msec);
   hood.set(false);
 
   //score mid-high goal
@@ -98,7 +98,7 @@ void Leftside() {
   wait(300, msec);
   fd.set(false);
   turnToAngle(-45, 2000);
-  driveTo(14, 3000, true, 8.0);
+  driveTo(-14.5, 3000, true, 8.0);
   intake(-8, 8, -8);
 }
 
@@ -109,13 +109,13 @@ void SAWP() {
 
   //drive to loader
   intake(-12, 12, 12);
-  driveTo(8, 1000);
+  driveTo(8, 1000); //8
   driveTo(-34.5, 2000);
   fd.set(true);
   turnToAngle(-90, 1000);
 
   //collect 3B
-  driveTo(11.5, 950, true, 10.0);
+  driveTo(12, 950);
 
   //score 4B
   driveTo(-21.5, 1500);
@@ -129,26 +129,29 @@ void SAWP() {
 
   //score mid-low goal
   swing(45, 1, 850);
-  driveTo(11, 3000, true, 8.0);
+  driveTo(11.5, 3000, true, 8.0);
   fd.set(true);
   wait(300, msec);
   fd.set(false);
+  intake(0, 0, 0);
   driveTo(14, 3000, true, 8.0);
   intake(8, -8, -8);
-  wait(200, msec);
+  wait(500, msec);
+  
 
   //move to mid-high goal
-  driveTo(6, 2000, false);
+  driveTo(-4, 2000, false);
   turnToAngle(-5,1000);
   correct_angle = normalizeTarget(0); //updates heading
+
   intake(-12, 12, 12);
-  driveTo(40, 2000);
+  driveTo(24, 2000);
   driveTo(8, 1000, true, 8.0);
   wait(200, msec);
 
   //score mid-high goal
   turnToAngle(-45, 1500);
-  driveTo(-17.5, 2000);
+  driveTo(-16, 2000);
   intake(12, -12, -12);
   wait(50, msec);
   intake(-12, 12, -12);
@@ -156,8 +159,14 @@ void SAWP() {
 
 void Skills() {
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  wing.set(true);
-  wing.set(false);
+  fd.set(true);
+  wait(500, msec);
+  driveTo(-4, 2000);
+  driveChassis(9, 9);
+  wait(800, msec);
+  driveChassis(0, 0);
+  fd.set(false);
+  intake(12, -12, -12);
 
 
   //drive to loader
@@ -200,6 +209,57 @@ void Skills() {
   //driveTo(-32, 2000, true, 8.0);
   //swing(0, -1, 2000);
   //driveTo(-22, 2000);
+}
+
+void Elims() {
+  /*//calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true);
+  intake(-12, 12, 12);
+
+  //collect 3B in corner
+  moveToPoint(10, 20, 1, 2000);
+  driveTo(2, 1000, true, 6.0);
+  wait(300, msec);
+  
+  //move to loader
+  turnToAngle(135, 2000);
+  driveTo(24, 2000);
+  turnToAngle(180, 2000);
+  driveTo(12.5, 2000);
+  */
+  //calibrate 
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true);
+
+  //drive to loader
+  intake(-12, 12, 12);
+  driveTo(23, 2000);
+  fd.set(true);
+  turnToAngle(90, 1000);
+
+  //collect 3B
+  driveTo(13.5, 950);
+
+  //score 4B
+  driveTo(-22, 1500, true, 11.0);
+  fd.set(false);
+  hood.set(true);
+  intake(12, -12, -12);
+  wait(50, msec);
+  intake(-12, 12, 12);
+  wait(800, msec);
+  hood.set(false);
+
+  //wing control
+  driveTo(4, 1000, false);
+  wing.set(false);
+  turnToAngle(45, 1000);
+  driveTo(-5, 1000, false);
+  turnToAngle(90, 1000);
+  driveTo(-14, 2000);
+  intake(0, 0, 0);
+  stopChassis(hold);
 }
 
 
