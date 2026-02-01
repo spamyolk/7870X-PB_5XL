@@ -6,7 +6,7 @@
 // Modify autonomous, driver, or pre-auton code below
 
 void runAutonomous() {
-  int auton_selected = 3;
+  int auton_selected = 6;
   switch(auton_selected) {
     case 1:
       PID_test();
@@ -24,6 +24,7 @@ void runAutonomous() {
       Skills();
       break;
     case 6:
+      Elims();
       break;
     case 7:
       break;
@@ -100,7 +101,7 @@ void runDriver() {
 
 
    // default tank drive or replace it with your preferred driver code here:
-   driveChassis(ch3 * 0.12, ch2 * 0.12);
+   driveChassis(ch3 * 0.12, ch2 * 0.12); //0.12
 
 
    //wing controls
