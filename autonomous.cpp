@@ -109,27 +109,29 @@ void SAWP() {
 
   //drive to loader
   intake(-12, 12, 12);
-  driveTo(8, 1000); //8
-  driveTo(-34.5, 2000);
+  driveTo(23, 2000);
   fd.set(true);
-  turnToAngle(-90, 1000);
+  turnToAngle(90, 1000);
 
   //collect 3B
-  driveTo(12, 950);
+  driveTo(13, 950, true, 11.0);
 
   //score 4B
-  driveTo(-21.5, 1500);
+  driveTo(-22, 1500);
   fd.set(false);
   hood.set(true);
   intake(12, -12, -12);
   wait(50, msec);
   intake(-12, 12, 12);
-  wait(900, msec);
+  wait(1000, msec);
   hood.set(false);
 
   //score mid-low goal
-  swing(45, 1, 850);
-  driveTo(11.5, 3000, true, 8.0);
+  //swing(45, 1, 850);
+  //driveTo(11.5, 3000, true, 8.0);
+  
+  driveTo(4, 1000, false);
+  moveToPoint();
   fd.set(true);
   wait(300, msec);
   fd.set(false);
