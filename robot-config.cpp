@@ -16,19 +16,19 @@ controller controller_1 = controller(primary);
 // gearSetting is one of the following: ratio36_1(red), ratio18_1(green), ratio6_1(blue)
 // all chassis motors should be reversed appropriately so that they spin vertical when given a positive voltage input
 // such as driveChassis(12, 12)
-motor left_chassis1 = motor(PORT14, ratio6_1, true); //port14
-motor left_chassis2 = motor(PORT12, ratio6_1, true); //port12
-motor left_chassis3 = motor(PORT8, ratio6_1, true); //port8
+motor left_chassis1 = motor(PORT13, ratio6_1, true);
+motor left_chassis2 = motor(PORT12, ratio6_1, true);
+motor left_chassis3 = motor(PORT4, ratio6_1, true);
 motor_group left_chassis = motor_group(left_chassis1, left_chassis2, left_chassis3);
-motor right_chassis1 = motor(PORT17, ratio6_1, false); //17-16 bad
-motor right_chassis2 = motor(PORT19, ratio6_1, false); //19-18 bad
-motor right_chassis3 = motor(PORT2, ratio6_1, false); //2
+motor right_chassis1 = motor(PORT17, ratio6_1, false);
+motor right_chassis2 = motor(PORT19, ratio6_1, false); 
+motor right_chassis3 = motor(PORT1, ratio6_1, false); 
 motor_group right_chassis = motor_group(right_chassis1, right_chassis2, right_chassis3);
 
 // game specific devices for push back
-motor intake_motor1 = motor(PORT10, ratio6_1, true);
-motor intake_motor2 = motor(PORT9, ratio18_1, true);
-motor intake_motor3 = motor(PORT1, ratio18_1, false);
+motor intake_motor1 = motor(PORT9, ratio6_1, true);
+motor intake_motor2 = motor(PORT8, ratio18_1, true);
+motor intake_motor3 = motor(PORT3, ratio18_1, false);
 inertial inertial_sensor = inertial(PORT21);
 digital_out fd = digital_out(Brain.ThreeWirePort.A);
 digital_out double_park = digital_out(Brain.ThreeWirePort.D);
@@ -76,7 +76,7 @@ double wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 //kp=.865, ki-.1,kd=7
 
 double distance_kp = .69, distance_ki = 0, distance_kd = 3.5;
-double turn_kp = 0.134, turn_ki = 0.0007, turn_kd = 0.53;
+double turn_kp = 0.18, turn_ki = 0.01, turn_kd = 0.9;  //0.0007, 0.053
 double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 4;
 
 // Enable or disable the use of tracking wheels
