@@ -6,7 +6,7 @@
 // Modify autonomous, driver, or pre-auton code below
 
 void runAutonomous() {
-  int auton_selected = 6;
+  int auton_selected = 4;
   switch(auton_selected) {
     case 1:
       PID_test();
