@@ -30,7 +30,6 @@ void PID_test() {
  wait(1, sec);
  turnToAngle(0, 2000);
  wait(1, sec);
- 
 }
 
 void Rightside() {
@@ -109,29 +108,63 @@ void SAWP() {
 
   //drive to loader
   intake(-12, 12, 12);
-  driveTo(23, 2000);
+  driveTo(25, 2000);
   fd.set(true);
   turnToAngle(90, 1000);
 
   //collect 3B
-  driveTo(13, 950, true, 11.0);
+  driveTo(15, 800, true, 8);
+  wait(200, msec);
 
   //score 4B
-  driveTo(-22, 1500);
-  fd.set(false);
+  driveTo(-22, 1000, true, 10.0);
   hood.set(true);
   intake(12, -12, -12);
-  wait(50, msec);
+  fd.set(false);
+  wait(75, msec);
   intake(-12, 12, 12);
-  wait(1000, msec);
+  wait(1200, msec);
+
+  //collect 3
+  driveTo(6, 1000, false);
+  swing(227, 1, 850);
   hood.set(false);
+  wait(1000, msec);
+  driveTo(6, 1500, true, 10.0);
+  driveTo(10, 2500, true, 6.0);
 
   //score mid-low goal
-  //swing(45, 1, 850);
-  //driveTo(11.5, 3000, true, 8.0);
+  intake(0, 0, 0);
+  driveTo(6, 1500, true, 10.0);
+  intake(12, -12, -12);
+  driveTo(10, 2500, true, 6.5);
+  wait(1000, msec);
+
+  /*/collect 3B
+  intake(-12, 12, 12);
+  driveTo(-9, 1000);
+  turnToAngle(-45, 1000);
+  driveTo(36, 3000);
+  wait(100, msec);
+
+  //score mid-high goal
+  turnToAngle(-45, 1000);
+  driveTo(-8, 1000, true, 6.0);
+  intake(-12, 12, -12);
+  wait(1000, msec);
+
+  //drive to loader
+  driveTo(46, 4000);
+  turnToAngle(-45, 1000);
+  fd.set(true);*/
+
+
   
+ /* driveTo(11.5, 3000, true, 8.0);
+  
+  
+  //score mid-low goal
   driveTo(4, 1000, false);
-  moveToPoint();
   fd.set(true);
   wait(300, msec);
   fd.set(false);
@@ -156,7 +189,7 @@ void SAWP() {
   driveTo(-16, 2000);
   intake(12, -12, -12);
   wait(50, msec);
-  intake(-12, 12, -12);
+  intake(-12, 12, -12);*/
 }
 
 void Skills() {
