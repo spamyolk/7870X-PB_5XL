@@ -104,16 +104,16 @@ void Leftside() {
 void SAWP() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  wing.set(true);
+  //wing.set(true);
 
   //drive to loader
   intake(-12, 12, 12);
-  driveTo(25, 2000);
+  driveTo(24.5, 2000);
   fd.set(true);
   turnToAngle(90, 1000);
 
   //collect 3B
-  driveTo(15, 800, true, 8);
+  driveTo(15, 700, true, 6);
   wait(200, msec);
 
   //score 4B
@@ -126,25 +126,25 @@ void SAWP() {
   wait(1200, msec);
 
   //collect 3
-  driveTo(6, 1000, false);
+  driveTo(2, 1000, false);
   swing(227, 1, 850);
   hood.set(false);
-  wait(1000, msec);
-  driveTo(6, 1500, true, 10.0);
-  driveTo(10, 2500, true, 6.0);
+  driveTo(6, 800, false);
+  fd.set(true);
+  wait(250, msec);
+  intake(0, 0, 0);
+  fd.set(false);
 
   //score mid-low goal
-  intake(0, 0, 0);
-  driveTo(6, 1500, true, 10.0);
+  driveTo(8, 1000);
   intake(12, -12, -12);
-  driveTo(10, 2500, true, 6.5);
-  wait(1000, msec);
+  wait(500, msec);
 
-  /*/collect 3B
-  intake(-12, 12, 12);
-  driveTo(-9, 1000);
-  turnToAngle(-45, 1000);
-  driveTo(36, 3000);
+  //collect 3B
+  //intake(-12, 12, 12);
+  driveTo(-8, 1000);
+  turnToAngle(-180, 1000);
+  /*driveTo(36, 3000);
   wait(100, msec);
 
   //score mid-high goal
@@ -154,42 +154,13 @@ void SAWP() {
   wait(1000, msec);
 
   //drive to loader
-  driveTo(46, 4000);
-  turnToAngle(-45, 1000);
-  fd.set(true);*/
-
-
-  
- /* driveTo(11.5, 3000, true, 8.0);
-  
-  
-  //score mid-low goal
-  driveTo(4, 1000, false);
-  fd.set(true);
-  wait(300, msec);
-  fd.set(false);
-  intake(0, 0, 0);
-  driveTo(14, 3000, true, 8.0);
-  intake(8, -8, -8);
-  wait(500, msec);
-  
-
-  //move to mid-high goal
-  driveTo(-4, 2000, false);
-  turnToAngle(-5,1000);
-  correct_angle = normalizeTarget(0); //updates heading
-
-  intake(-12, 12, 12);
-  driveTo(24, 2000);
-  driveTo(8, 1000, true, 8.0);
-  wait(200, msec);
-
-  //score mid-high goal
-  turnToAngle(-45, 1500);
-  driveTo(-16, 2000);
-  intake(12, -12, -12);
-  wait(50, msec);
-  intake(-12, 12, -12);*/
+  //driveTo(46, 4000);
+  //turnToAngle(-45, 1000);
+  inertial_sensor.setRotation(90, degrees);
+  correct_angle = 90;
+  x_pos = 0;
+  y_pos = 0;
+  moveToPoint(-22, 2, -1, 1500, 11.0);*/
 }
 
 void Skills() {
