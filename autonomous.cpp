@@ -44,7 +44,7 @@ void SAWP2() {
   turnToAngle(90, 500);
 
   //collect 3B, loader-r2
-  driveTo(15, 700, true, 5.5);
+  driveTo(15, 700, true, 5.0);
   wait(200, msec);
 
   //score 4B, long-r2
@@ -54,34 +54,42 @@ void SAWP2() {
   fd.set(false);
   wait(100, msec);
   intake(-12, 12, 12);
-  wait(1100, msec);
+  wait(1000, msec);
 
   //collect 3B, loader-r2
-  turnToAngle(180, 600);
+  turnToAngle(182, 600);
   hood.set(false);
-  driveTo(2, 1000, false);
-  moveToPoint(3, 10, 1, 1500, true, 3.0);
-  driveTo(1.5, 500, false);
-  turnToAngle(-135, 800);
+  driveTo(3, 400, false);
+  moveToPoint(3.2, 8.5, 1, 1200, true, 3.0);
+  swing(-132, 1, 600, true, 10.0);
+  intake(0, 0, 0);
 
   //score 3B, middle-low
-  driveTo(10, 1000);
-  intake(12, -12, -10);
-  wait(1200, msec);
+  driveTo(12.5, 800);
+  intake(8, -12, -12.0);
+  wait(1100, msec);
   intake(0, 0, 0);
 
   //collect 3B, loader-r1
-  driveTo(-10, 1000);
-  turnToAngle(-180, 1000);
+  driveTo(-10, 900);
+  turnToAngle(-180, 800);
   intake(-12, 12, 12);
-  driveTo(34, 1400, true, 10.0);
-  driveTo(1, 100, true, 10.0);
-  wait(100, msec);
+  moveToPoint(4, -18, 1, 1800);
+  driveTo(7, 500, true, 9.0);
+  driveTo(-2, 200);
+  //driveTo(30, 1000, false, 8.5);
+  //fd.set(true);
+  //wait(100, msec);
+  //fd.set(false);
+  //driveTo(-2.5, 300, false, 10.0);
 
   //score 3B, middle-high
-  turnToAngle(135, 1000);
-  driveTo(-13.5, 1000);
-  intake(-12, 12, -12);
+  turnToAngle(135, 600);
+  driveTo(-14.5, 1000);
+  intake(12, -12, 12);
+  wait(100, msec);
+  intake(-12, 12, -8);
+  wait(1000, msec);
 }
 
 void SAWP1() {
