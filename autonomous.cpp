@@ -164,57 +164,98 @@ void SAWP() {
 }
 
 void Skills() {
+  //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  //wing.set(true);
+
+  //move, loader-r2
+  intake(-12, 12, 12);
+
+  driveTo(24.5, 2000);
   fd.set(true);
-  wait(500, msec);
-  driveTo(-4, 2000);
-  driveChassis(9, 9);
-  wait(800, msec);
-  driveChassis(0, 0);
+  turnToAngle(90, 1000);
+
+  //collect 3B, loader-r2
+  driveTo(15, 700, true, 5.5);
+  wait(1200, msec);
+  driveTo(-6, 1000);
+
+  //move, long-b1
+  inertial_sensor.setRotation(90, degrees);
+  correct_angle = 90;
+  x_pos = 0;
+  y_pos = 0;
+  moveToPoint(-5, 6.45, -1, 2000);
+  intake(0, 0, 0);
   fd.set(false);
-  intake(12, -12, -12);
+  turnToAngle(90, 1000);
+  moveToPoint(-54, 6.45, -1, 2000);
 
+  turnToAngle(45, 1000);
+  driveTo(-12.4, 1000);
+  turnToAngle(-90, 1000);
+  driveTo(-14, 1000, true, 10.0);
 
-  //drive to loader
-  //driveTo(35, 3000, true, 10.0);
-  //turnToAngle(90, 2000);
+  //score 7B, long-b1
+  hood.set(true);
+
+  intake(-12, -12, -12);
+  wait(100, msec);
+  intake(-12, 12, 12);
+  wait(2250, msec);
+  intake(0, 0, 0);
+
+  //move, loader-b1
+  fd.set(true);
+  driveTo(16, 1000);
+  hood.set(false);
+  intake(-12, 12, 12);
+  driveTo(10, 700, true, 5.5);
+  wait(1200, msec);
+
+  //score 6B, loader-b1
+  driveTo(-22, 1000, true, 10.0);
+  hood.set(true);
+
+  intake(-12, -12, -12);
+  fd.set(false);
+  wait(100, msec);
+  intake(-12, 12, 12);
+  wait(2250, msec);
+  intake(0, 0, 0);
+
+  driveTo(4, 1000);
+  hood.set(false);
+  driveTo(-4, 1000, true, 10.0);
+
+  //move, park-red
+  //driveTo(12, 1000, true, 10.0);
+  //turnToAngle(-135, 1000);
+  /*driveTo(-10, 1000);
+  turnToAngle(0, 1000);
+  driveTo(-60, 5000);
+  driveTo(-20, 5000, true, 6.0);
+  driveTo(4, 1000);
+  turnToAngle(-90, 1000);
+  driveTo(6, 2000);*/
+  
+
+  
+  //moveToPoint(5, -6.4, -1, 2000);
+  //moveToPoint(-5, 6.4, -1, 2000);
+  //inertial_sensor.setRotation(180, degrees);
+  //correct_angle = 180;
+  //x_pos = 0;
+  //y_pos = 0;
+  //moveToPoint(10, 10, 1, 1500);
   //fd.set(true);
-  //intake(-12, 12, 12);
-  //wait(400, msec);
-  //collect 3B
-  //driveChassis(11, 11);
-  //wait(350, msec);
-  //driveTo(-1, 1000);
-  //wait(2000, msec);
-
-  //score 4B
-  //driveTo(-30, 3000, true, 8.0);
-  //intake(12, -12, -12);
-  //wait(300, msec);
-  //intake(-12, 12, 12);
+  //wait(500, msec);
+  //driveTo(-4, 2000);
+  //driveChassis(9, 9);
+  //wait(800, msec);
+  //driveChassis(0, 0);
   //fd.set(false);
-  //hood.set(true);
-  //wait(3290, msec);
-  //driveTo(12, 3000, true, 12.0);
-  //hood.set(false);
-  //driveChassis(-5, -5);
-  //wait(1500, msec);
-
-  //score low goal
-  //driveTo(1,50, true, 4.0);
-  //swing(227, 1, 2000);
-  //driveTo(24, 3000, true, 2.0); //2.0
-  //wait(300, msec);
-  //driveTo(11, 3000, true, 3.0);
   //intake(12, -12, -12);
-  //wait(2500, msec);
-
-  //clear blocks in parking
-  //driveTo(-12, 3000, true, 6.0);
-  //turnToAngle(-90, 500);
-  //driveTo(-32, 2000, true, 8.0);
-  //swing(0, -1, 2000);
-  //driveTo(-22, 2000);
 }
 
 void Elims() {
