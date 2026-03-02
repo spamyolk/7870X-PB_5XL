@@ -166,46 +166,48 @@ void SAWP() {
 void Skills() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  //wing.set(true);
-
-  //move, loader-r2
+  wing.set(true);
+ 
+  //move, middle-high -> collect+score 2B
   intake(-12, 12, 12);
+  moveToPoint(-10, 12, 1, 1500, false);
+  turnToAngle(-135, 1000);
+  intake(-12, -2, -4);
+  driveTo(-14.5, 1500);
+  intake(-12, 8, -6);
+  wait(550, msec); //maybe cut 100msec
 
-  driveTo(24.5, 2000);
+  //move, loader-r1 -> collect 6B
+  moveToPoint(-12.4, -5, 1, 2000, false);
   fd.set(true);
-  turnToAngle(90, 1000);
-
-  //collect 3B, loader-r2
-  driveTo(15, 700, true, 5.5);
+  turnToAngle(-180, 1000);
+  intake(-12, 12, 12);
+  driveTo(10.5, 1000, true, 5.5);
   wait(1200, msec);
-  driveTo(-6, 1000);
 
-  //move, long-b1
-  inertial_sensor.setRotation(90, degrees);
-  correct_angle = 90;
-  x_pos = 0;
-  y_pos = 0;
-  moveToPoint(-5, 6.45, -1, 2000);
+  //move, loader-b2
+  driveTo(-8, 1000);
+  turnToAngle(180, 1000);
   intake(0, 0, 0);
   fd.set(false);
-  turnToAngle(90, 1000);
-  moveToPoint(-54, 6.45, -1, 2000);
+  moveToPoint(-25, 14, -1, 3000, false, 9.0);
+  turnToAngle(180, 1000);
 
-  turnToAngle(45, 1000);
-  driveTo(-12.4, 1000);
-  turnToAngle(-90, 1000);
-  driveTo(-14, 1000, true, 10.0);
+  x_pos = 0;
+  y_pos = 0;
+  moveToPoint(0, 50, -1, 4000);
 
-  //score 7B, long-b1
+  turnToAngle(90, 1500);
+  driveTo(8.5, 2000);
+  turnToAngle(0, 1500);
+  driveTo(-10, 1500);
+
+  //score 6B, long-b2
   hood.set(true);
-
-  intake(-12, -12, -12);
-  wait(100, msec);
   intake(-12, 12, 12);
   wait(2250, msec);
-  intake(0, 0, 0);
-
-  //move, loader-b1
+  
+  //collect 6B, loader-b2
   fd.set(true);
   driveTo(16, 1000);
   hood.set(false);
@@ -216,46 +218,20 @@ void Skills() {
   //score 6B, loader-b1
   driveTo(-22, 1000, true, 10.0);
   hood.set(true);
-
-  intake(-12, -12, -12);
-  fd.set(false);
-  wait(100, msec);
   intake(-12, 12, 12);
+  fd.set(false);
   wait(2250, msec);
   intake(0, 0, 0);
-
-  driveTo(4, 1000);
   hood.set(false);
-  driveTo(-4, 1000, true, 10.0);
 
-  //move, park-red
-  //driveTo(12, 1000, true, 10.0);
-  //turnToAngle(-135, 1000);
-  /*driveTo(-10, 1000);
-  turnToAngle(0, 1000);
-  driveTo(-60, 5000);
-  driveTo(-20, 5000, true, 6.0);
-  driveTo(4, 1000);
-  turnToAngle(-90, 1000);
-  driveTo(6, 2000);*/
+  x_pos = 0;
+  y_pos = 0;
   
+  //moveToBP
+  curveCircle(90, 36, 3000);
 
+  //clear -> collect 5B, BP
   
-  //moveToPoint(5, -6.4, -1, 2000);
-  //moveToPoint(-5, 6.4, -1, 2000);
-  //inertial_sensor.setRotation(180, degrees);
-  //correct_angle = 180;
-  //x_pos = 0;
-  //y_pos = 0;
-  //moveToPoint(10, 10, 1, 1500);
-  //fd.set(true);
-  //wait(500, msec);
-  //driveTo(-4, 2000);
-  //driveChassis(9, 9);
-  //wait(800, msec);
-  //driveChassis(0, 0);
-  //fd.set(false);
-  //intake(12, -12, -12);
 }
 
 void Elims() {
