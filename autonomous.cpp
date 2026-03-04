@@ -101,6 +101,24 @@ void Leftside() {
   intake(-8, 8, -8);
 }
 
+void intakeThread() {
+  optical_sensor.setLight(ledState::on);
+  optical_sensor.setLightPower(100);
+  while(!optical_sensor.isNearObject()) {
+    wait(10, msec);
+  }
+  intake(-12, -12, 0);
+  wait(300, msec);
+  intake(0, 0, 0);
+}
+
+void Test() {
+  intake(-12, 12, 12);
+  thread it = thread(intakeThread);
+  wait(3, sec);
+  it.interrupt();
+  intake(12, -12, -12);
+}
 void SAWP() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
