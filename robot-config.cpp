@@ -54,7 +54,7 @@ motor_group arm_motor = motor_group(arm_motor1, arm_motor2);
 motor intake_motor = motor(PORT18, ratio18_1, true);
 digital_out claw = digital_out(Brain.ThreeWirePort.B);
 digital_out rush_arm = digital_out(Brain.ThreeWirePort.C);
-optical optical_sensor = optical(PORT3);
+optical optical_sensor = optical(PORT7);
 distance intake_distance = distance(PORT20);
 distance clamp_distance = distance(PORT21);
 digital_out mogo_mech = digital_out(Brain.ThreeWirePort.D);
@@ -75,8 +75,8 @@ double wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 // heading_correction_* : PID for heading correction during linear movement
 //kp=.865, ki-.1,kd=7
 
-double distance_kp = .69, distance_ki = 0, distance_kd = 3.5;
-double turn_kp = 0.18, turn_ki = 0.01, turn_kd = 0.9;  //0.0007, 0.053
+double distance_kp = 0.69, distance_ki = 0.0, distance_kd = 3.5; //0.69, 0.0, 3.5
+double turn_kp = 0.18, turn_ki = 0.05, turn_kd = 0.85;  //0.18, 0.05, 0.85
 double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 4;
 
 // Enable or disable the use of tracking wheels
