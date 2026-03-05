@@ -122,63 +122,61 @@ void Test() {
 void SAWP() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  //wing.set(true);
+  wing.set(true);
 
-  //drive to loader
+  //move, loader-r2
   intake(-12, 12, 12);
   driveTo(24.5, 2000);
   fd.set(true);
-  turnToAngle(90, 1000);
+  turnToAngle(90, 500);
 
-  //collect 3B
-  driveTo(15, 700, true, 6);
-  wait(200, msec);
-
-  //score 4B
-  driveTo(-22, 1000, true, 10.0);
-  hood.set(true);
-  intake(12, -12, -12);
-  fd.set(false);
-  wait(75, msec);
-  intake(-12, 12, 12);
-  wait(1200, msec);
-
-  //collect 3
-  driveTo(2, 1000, false);
-  swing(227, 1, 850);
-  hood.set(false);
-  driveTo(6, 800, false);
-  fd.set(true);
+  //collect 3B, loader-r2
+  driveTo(15, 700, true, 6.0);
   wait(250, msec);
-  intake(0, 0, 0);
+
+  //score 4B, long-r2
+  turnToAngle(90, 1000);
+  driveTo(-21, 1000, true, 10.0);
+  hood.set(true);
+  intake(-12, -12, -12);
   fd.set(false);
-
-  //score mid-low goal
-  driveTo(8, 1000);
-  intake(12, -12, -12);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-  wait(500, msec);
-
-  //collect 3B
-  //intake(-12, 12, 12);
-  driveTo(-8, 1000);
-  turnToAngle(-180, 1000);
-  /*driveTo(36, 3000);
   wait(100, msec);
-
-  //score mid-high goal
-  turnToAngle(-45, 1000);
-  driveTo(-8, 1000, true, 6.0);
-  intake(-12, 12, -12);
+  intake(-12, 12, 12);
   wait(1000, msec);
 
-  //drive to loader
-  //driveTo(46, 4000);
-  //turnToAngle(-45, 1000);
-  inertial_sensor.setRotation(90, degrees);
-  correct_angle = 90;
-  x_pos = 0;
-  y_pos = 0;
-  moveToPoint(-22, 2, -1, 1500, 11.0);*/
+  //collect 3B, loader-r2
+  intake(-12, 12, 12);
+  thread it = thread(intakeThread);
+  turnToAngle(200, 750);
+  hood.set(false);
+  driveTo(4, 1000, false, 6.0);
+  fd.set(true);
+  driveTo(10, 1000);
+  fd.set(false);
+  turnToAngle(-135, 500);
+
+  //score 3B, middle-low
+  it.interrupt();
+  intake(4, -10, -12);
+  driveTo(10, 1000);
+  intake(8, -8, 0);
+  wait(750, msec);
+  intake(0, 0, 0);
+
+  //collect 3B, loader-r1
+  driveTo(-6, 1000, false);
+  turnToAngle(-180, 1000);
+  intake(-12, 12, 12);
+  driveTo(22, 2000, false);
+  fd.set(true);
+  driveTo(10, 1000);
+  turnToAngle(135, 1000);
+
+  //score 3B, middle-high
+  driveTo(-14.5, 1000);
+  intake(12, -12, 12);
+  wait(100, msec);
+  intake(-12, 8, -6);
 }
 
 void Skills() {
