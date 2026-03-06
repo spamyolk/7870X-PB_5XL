@@ -159,7 +159,7 @@ void SAWP() {
   it.interrupt();
   intake(4, -10, -12);
   driveTo(10, 1000);
-  intake(8, -8, 0);
+  intake(7, -7, 0);
   wait(750, msec);
   intake(0, 0, 0);
 
