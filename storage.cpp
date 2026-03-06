@@ -57,3 +57,34 @@
   //hood.set(true);
   //fd.set(false);
   //wait(2250, msec);
+
+//moveToBP
+  wing.set(false);
+  curveCircle(90, 36, 1500);
+
+  //clear -> collect 4-6B, BP
+  intake(-12, 12, 12);
+  driveTo(-2, 1000);
+  driveTo(24, 2000);
+  driveTo(30, 2000, true, 11.0);
+  driveTo(12, 1000, true, 3.0);
+
+  //collect 1B, long-b1
+  driveTo(-6, 1000);
+  turnToAngle(200, 1500);
+  driveTo(30, 1000);
+
+  //score 4-7B, middle-high
+  turnToAngle(40, 1000);
+  driveTo(-10, 1000);
+
+  fd.set(true);
+  intake(12, -12, -12);
+  wait(200, msec);
+  for (int t = 0; t <= 25; t++) {
+    double time = t / 10.0;
+    double v = 3.5 + exp(-0.9 * time);
+    intake(-12, v, -v);
+    wait(100, msec);
+}
+  intake(0, 0, 0);
