@@ -6,32 +6,34 @@
 // Modify autonomous, driver, or pre-auton code below
 
 void runAutonomous() {
-  int auton_selected = 7;
+  int auton_selected = 5;
   switch(auton_selected) {
     case 1:
-      PID_test();
+      SAWP();
       break;
     case 2:
-      Rightside();
+      LeftS();
       break;  
     case 3:
-      Leftside();
+      LeftF();
       break;
     case 4:
-      SAWP1();
+      RightS();
       break; 
     case 5:
-      Skills();
+      RightF();
       break;
     case 6:
-      Elims();
+      RightF2();
       break;
     case 7:
-      SAWP2();
+      Seven_R();
       break;
     case 8:
+      Skills();
       break;
     case 9:
+      Test();
       break;
   }
 }
@@ -62,7 +64,7 @@ int colorGood(){
 
 
 void runDriver() {
-  stopChassis(coast);
+ stopChassis(coast);
  heading_correction = false;
  //other personal vars
  int driver_selected = 3;
@@ -72,9 +74,6 @@ void runDriver() {
  bool a_lastPressed = false;
  bool b_toggleState = false;
  bool b_lastPressed = false;
- bool y_toggleState = false;
- bool y_lastPressed = false;
-
 
  while (true) {
    thread cg = thread(colorGood);
@@ -103,7 +102,6 @@ void runDriver() {
 
    // default tank drive or replace it with your preferred driver code here:
    driveChassis(ch3 * 0.12, ch2 * 0.12); //0.12
-
 
    //wing controls
    if (button_x && !x_lastPressed) {
@@ -145,21 +143,6 @@ void runDriver() {
    } else {
      fd.set(false);
    }
-
-
-   //double park controls
-   if (button_y && !y_lastPressed) {
-     y_toggleState = !y_toggleState;
-   }
-   y_lastPressed = button_y;
-
-
-   if (y_toggleState) {
-     double_park.set(true);
-   }/* else {
-     double_park.set(false);
-   }*/
-
 
    switch (driver_selected) {
      case 1:
@@ -239,16 +222,16 @@ void runDriver() {
      case 3:
        //normal intake controls
        if (r1 == true) {
-         //intake to score tall/capacity
-         intake(-12, 12, 12);
+        //intake to score tall/capacity
+        intake(-12, 12, 12);
        } else if (r2 == true) {
-         //intake to score middle
-         intake(-12, 12, -12);
+        //intake to score middle
+        intake(-12, 12, -12);
        } else if (l1 == true) {
-         //outtake
-         intake(12, -12, -12);
+        //outtake
+        intake(12, -12, -12);
        } else {
-         intake(0, 0, 0); //stop
+        intake(0, 0, 0); //stop
        }
 
 
