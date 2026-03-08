@@ -5,6 +5,13 @@ using namespace vex;
 extern brain Brain;
 
 // VEXcode devices
+extern distance example_distance_sensor;
+extern digital_out example_piston;
+extern rotation horizontal_tracker;
+extern rotation vertical_tracker;
+extern distance right_sensor;
+extern distance back_sensor;
+
 extern controller controller_1;
 extern motor left_chassis1;
 extern motor left_chassis2;
@@ -16,28 +23,12 @@ extern motor right_chassis3;
 extern motor_group right_chassis;
 extern inertial inertial_sensor;
 extern optical optical_sensor;
-extern distance example_distance_sensor;
-extern digital_out example_piston;
-extern rotation horizontal_tracker;
-extern rotation vertical_tracker;
+extern distance front_sensor;
+extern distance left_sensor;
+extern distance left_sensor;
 extern motor intake_motor1;
 extern motor intake_motor2;
 extern motor intake_motor3;
-extern distance front_sensor;
-extern distance left_sensor;
-extern distance right_sensor;
-extern distance back_sensor;
-
-extern motor arm_motor1;
-extern motor arm_motor2;
-extern motor_group arm_motor;
-extern motor intake_motor;
-extern digital_out claw;
-extern digital_out rush_arm;
-extern optical optical_sensor;
-extern distance intake_distance;
-extern distance clamp_distance;
-extern digital_out mogo_mech;
 extern digital_out fd;
 extern digital_out double_park;
 extern digital_out hood;
