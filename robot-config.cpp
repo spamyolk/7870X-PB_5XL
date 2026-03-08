@@ -30,6 +30,7 @@ motor intake_motor1 = motor(PORT9, ratio6_1, true);
 motor intake_motor2 = motor(PORT8, ratio18_1, true);
 motor intake_motor3 = motor(PORT3, ratio18_1, false);
 inertial inertial_sensor = inertial(PORT21);
+optical optical_sensor = optical(PORT7);
 digital_out fd = digital_out(Brain.ThreeWirePort.A);
 digital_out double_park = digital_out(Brain.ThreeWirePort.D);
 digital_out hood = digital_out(Brain.ThreeWirePort.C);
@@ -43,8 +44,8 @@ rotation vertical_tracker = rotation(PORT11, true);
 // Distance reset sensors
 // Set these to random ports if you are not using distance resets
 distance front_sensor = distance(PORT12);
-distance left_sensor = distance(PORT13);
-distance right_sensor = distance(PORT14);
+distance left_sensor = distance(PORT5);
+distance right_sensor = distance(PORT7);
 distance back_sensor = distance(PORT15);
 
 // game specific devices for high stakes
@@ -54,7 +55,6 @@ motor_group arm_motor = motor_group(arm_motor1, arm_motor2);
 motor intake_motor = motor(PORT18, ratio18_1, true);
 digital_out claw = digital_out(Brain.ThreeWirePort.B);
 digital_out rush_arm = digital_out(Brain.ThreeWirePort.C);
-optical optical_sensor = optical(PORT7);
 distance intake_distance = distance(PORT20);
 distance clamp_distance = distance(PORT21);
 digital_out mogo_mech = digital_out(Brain.ThreeWirePort.D);
@@ -101,9 +101,9 @@ double vertical_tracker_diameter = 1.975; // Diameter of the vertical tracker wh
 // All values should be positive numbers
 // If you are not using all four distance sensors, just set the unused ones to 0
 // If you are not using distance resets these values will be ignored
-double front_sensor_offset = 0.0; //
-double left_sensor_offset = 0.0; //
-double right_sensor_offset = 0.0; 
+double front_sensor_offset = 0.0;
+double left_sensor_offset = 3.75;
+double right_sensor_offset = -3.75; 
 double back_sensor_offset = 0.0;
 
 // ============================================================================
