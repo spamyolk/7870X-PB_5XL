@@ -16,25 +16,25 @@ controller controller_1 = controller(primary);
 // gearSetting is one of the following: ratio36_1(red), ratio18_1(green), ratio6_1(blue)
 // all chassis motors should be reversed appropriately so that they spin vertical when given a positive voltage input
 // such as driveChassis(12, 12)
-motor left_chassis1 = motor(PORT13, ratio6_1, true);
-motor left_chassis2 = motor(PORT12, ratio6_1, true);
-motor left_chassis3 = motor(PORT4, ratio6_1, true);
+motor left_chassis1 = motor(PORT7, ratio6_1, true);
+motor left_chassis2 = motor(PORT8, ratio6_1, true);
+motor left_chassis3 = motor(PORT2, ratio6_1, true);
 motor_group left_chassis = motor_group(left_chassis1, left_chassis2, left_chassis3);
-motor right_chassis1 = motor(PORT17, ratio6_1, false);
-motor right_chassis2 = motor(PORT19, ratio6_1, false); 
-motor right_chassis3 = motor(PORT1, ratio6_1, false); 
+motor right_chassis1 = motor(PORT5, ratio6_1, false);
+motor right_chassis2 = motor(PORT3, ratio6_1, false); 
+motor right_chassis3 = motor(PORT9, ratio6_1, false); 
 motor_group right_chassis = motor_group(right_chassis1, right_chassis2, right_chassis3);
 
 // game specific devices for push back
-motor intake_motor1 = motor(PORT9, ratio6_1, true);
-motor intake_motor2 = motor(PORT8, ratio18_1, true);
-motor intake_motor3 = motor(PORT3, ratio18_1, false);
+motor intake_motor1 = motor(PORT1, ratio6_1, true);
+motor intake_motor2 = motor(PORT15, ratio18_1, true);
+motor intake_motor3 = motor(PORT17, ratio18_1, true); //note, port16 is weird...
 inertial inertial_sensor = inertial(PORT21);
-optical optical_sensor = optical(PORT7);
-digital_out fd = digital_out(Brain.ThreeWirePort.A);
-digital_out double_park = digital_out(Brain.ThreeWirePort.D);
-digital_out hood = digital_out(Brain.ThreeWirePort.C);
-digital_out wing = digital_out(Brain.ThreeWirePort.E);
+optical optical_sensor = optical(PORT11);
+digital_out fd = digital_out(Brain.ThreeWirePort.D);
+digital_out double_park = digital_out(Brain.ThreeWirePort.A);
+digital_out hood = digital_out(Brain.ThreeWirePort.H);
+digital_out wing = digital_out(Brain.ThreeWirePort.F);
 
 // Format is rotation(port, reversed)
 // just set these to random ports if you don't use tracking wheels
@@ -44,7 +44,7 @@ rotation vertical_tracker = rotation(PORT11, true);
 // Distance reset sensors
 // Set these to random ports if you are not using distance resets
 distance front_sensor = distance(PORT12);
-distance left_sensor = distance(PORT5);
+distance left_sensor = distance(PORT20);
 distance right_sensor = distance(PORT7);
 distance back_sensor = distance(PORT15);
 
@@ -75,9 +75,9 @@ double wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 // heading_correction_* : PID for heading correction during linear movement
 //kp=.865, ki-.1,kd=7
 
-double distance_kp = 0.69, distance_ki = 0.0, distance_kd = 3.5; //0.69, 0.0, 3.5
-double turn_kp = 0.18, turn_ki = 0.05, turn_kd = 0.85;  //0.18, 0.05, 0.85
-double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 4;
+double distance_kp = 0.68, distance_ki = 0.0, distance_kd = 2.3; //0.69, 0.0, 3.5
+double turn_kp = 0.16, turn_ki = 0.02, turn_kd = 0.85;  //0.18, 0.05, 0.85
+double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 4; //0.6, 0.0, 4.0
 
 // Enable or disable the use of tracking wheels
 bool using_horizontal_tracker = false;  // Set to true if a horizontal tracking wheel is installed and used for odometry
