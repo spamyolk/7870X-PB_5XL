@@ -6,7 +6,7 @@
 // Modify autonomous, driver, or pre-auton code below
 
 void runAutonomous() {
-  int auton_selected = 5;
+  int auton_selected = 1;
   switch(auton_selected) {
     case 1:
       SAWP();
@@ -33,7 +33,7 @@ void runAutonomous() {
       Skills();
       break;
     case 9:
-      Test();
+      PID_test();
       break;
   }
 }
@@ -46,8 +46,8 @@ bool button_up_arrow, button_down_arrow, button_left_arrow, button_right_arrow;
 int chassis_flag = 0;
 
 int colorGood(){
- optical_sensor.setLight(ledState::on);      // Turn on optical sensor light
- optical_sensor.setLightPower(100);          // Set light power to max
+ //optical_sensor.setLight(ledState::on);      // Turn on optical sensor light
+ //optical_sensor.setLightPower(100);          // Set light power to max
 
 
  while(true) {
@@ -68,12 +68,16 @@ void runDriver() {
  heading_correction = false;
  //other personal vars
  int driver_selected = 3;
- bool x_toggleState = false;
- bool x_lastPressed = false;
- bool a_toggleState = false;
- bool a_lastPressed = false;
+ //bool x_toggleState = false;
+ //bool x_lastPressed = false;
+ //bool a_toggleState = false;
+ //bool a_lastPressed = false;
  bool b_toggleState = false;
  bool b_lastPressed = false;
+ bool down_toggleState = false;
+ bool down_lastPressed = false;
+ bool l2_toggleState = false;
+ bool l2_lastPressed = false;
 
  while (true) {
    thread cg = thread(colorGood);
@@ -90,9 +94,9 @@ void runDriver() {
    l2 = controller_1.ButtonL2.pressing();
    r1 = controller_1.ButtonR1.pressing();
    r2 = controller_1.ButtonR2.pressing();
-   button_a = controller_1.ButtonA.pressing();
+   //button_a = controller_1.ButtonA.pressing();
    button_b = controller_1.ButtonB.pressing();
-   button_x = controller_1.ButtonX.pressing();
+   //button_x = controller_1.ButtonX.pressing();
    button_y = controller_1.ButtonY.pressing();
    button_up_arrow = controller_1.ButtonUp.pressing();
    button_down_arrow = controller_1.ButtonDown.pressing();
@@ -104,13 +108,13 @@ void runDriver() {
    driveChassis(ch3 * 0.12, ch2 * 0.12); //0.12
 
    //wing controls
-   if (button_x && !x_lastPressed) {
-     x_toggleState = !x_toggleState;
+   if (button_down_arrow && !down_lastPressed) {
+     down_toggleState = !down_toggleState;
    }
-   x_lastPressed = button_x;
+   down_lastPressed = button_down_arrow;
 
 
-   if (x_toggleState) {
+   if (down_toggleState) {
      wing.set(true);
    } else {
      wing.set(false);
@@ -118,13 +122,13 @@ void runDriver() {
 
 
    //hood controls
-   if (button_a && !a_lastPressed) {
-     a_toggleState = !a_toggleState;
+   if (l2 && !l2_lastPressed) {
+     l2_toggleState = !l2_toggleState;
    }
-   a_lastPressed = button_a;
+   l2_lastPressed = l2;
 
 
-   if (a_toggleState) {
+   if (l2_toggleState) {
      hood.set(true);
    } else {
      hood.set(false);
@@ -255,6 +259,8 @@ void runPreAutonomous() {
 
   double current_heading = inertial_sensor.heading();
   Brain.Screen.print(current_heading);
+  Brain.Screen.print(x_pos);
+  Brain.Screen.print(y_pos);
   
   // odom tracking
   resetChassis();
