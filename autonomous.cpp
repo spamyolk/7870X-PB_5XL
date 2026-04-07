@@ -16,20 +16,19 @@
 void PID_test() {
  // Use this for tuning linear
  //driveTo(24, 2000);
- //wait(2, sec);
- //driveTo(-24, 2000);
  //Use this for tuning turn
- 
+ /*
  turnToAngle(90, 2000);
  wait(1, sec);
  turnToAngle(180, 2000);
  wait(1, sec);
- turnToAngle(270, 2000);
+ turnToAngle(-360, 2000);
  wait(1, sec);
  turnToAngle(360, 2000);
  wait(1, sec);
  turnToAngle(0, 2000);
  wait(1, sec);
+ */
 }
 
 void intakeThread() {
@@ -94,39 +93,34 @@ void Seven_R() {
 void SAWP() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  wing.set(true);
+  //wing.set(true); //add later
 
   //move, loader-r2
   intake(-12, 12, 12);
-  driveTo(24.5, 2000);
+  driveTo(20, 2000, false);
   fd.set(true);
   turnToAngle(90, 500);
 
   //collect 3B, loader-r2
-  driveTo(15, 700, true, 5.75);
-  wait(250, msec);
+  driveTo(15.5, 700, true, 6.5); //15
+  wait(500, msec);
 
   //score 4B, long-r2
-  turnToAngle(90, 1000);
-  driveTo(-21, 1000, true, 10.0);
+  driveTo(-28, 1250, true);
   hood.set(true);
-  intake(-12, -12, -12);
   fd.set(false);
-  wait(100, msec);
-  intake(-12, 12, 12);
-  wait(1000, msec);
+  wait(900, msec);
 
   //collect 3B, loader-r2
-  intake(-12, 12, 12);
-  thread it = thread(intakeThread);
-  turnToAngle(200, 750);
+  turnToAngle(210, 1000);
   hood.set(false);
-  driveTo(4, 1000, false, 6.0);
+  driveTo(4, 1000, false);
   fd.set(true);
-  driveTo(10, 1000);
+  driveTo(4, 1000, false);
   fd.set(false);
-  turnToAngle(-135, 500);
+  turnToAngle(-180, 500);
 
+/*
   //score 3B, middle-low
   it.interrupt();
   intake(4, -10, -12);
@@ -149,6 +143,7 @@ void SAWP() {
   intake(12, -12, 12);
   wait(100, msec);
   intake(-12, 8, -6);
+  */
 }
 
 void LeftS() {
