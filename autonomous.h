@@ -2,13 +2,11 @@
 
 void PID_test();
 void Test();
-void Seven_R();
-void redGoalRush();
 void SAWP();
-void LeftS();
-void LeftF();
-void RightS();
-void RightF();
-void RightF2();
+void Left4();
+void Right4();
+void Left7();
+void Right7();
+void Left34();
+void Right34();
 void Skills();
-void SAWP();
