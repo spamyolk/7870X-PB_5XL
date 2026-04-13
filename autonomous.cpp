@@ -51,342 +51,99 @@ void Test() {
   */
 }
 
-void Seven_R() {
-  //calibrate
-  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  wing.set(true);
-  
-  //move, middle-high -> collect+score 2B, middle-high
-  intake(-12, 12, 12);
-  moveToPoint(-10, 12, 1, 1500, false);
-  turnToAngle(-135, 1000);
-  intake(-12, -4, -4);
-  driveTo(-14.5, 1500);
-  intake(-12, 7, -5);
-  wait(600, msec);
 
-  //move, loader-r1 -> collect 6B
-  moveToPoint(-12.5, -5, 1, 2000, false);
-  fd.set(true);
-  turnToAngle(-180, 1000);
-  intake(-12, 12, 12);
-  driveTo(11.5, 1000, true, 5.5);
-  wait(350, msec);
 
-  //score 7B, long-r1
-  driveTo(-22, 1000, true, 10.0);
-  hood.set(true);
-  fd.set(false);
-  wait(1000, msec);
-
-  //wing control
-  driveTo(4, 1000, false);
-  wing.set(false);
-  turnToAngle(135, 1000);
-  driveTo(-4.75, 1000, false);
-  turnToAngle(180, 1000);
-  driveTo(-14, 1300);
-  intake(0, 0, 0);
-  stopChassis(hold);
-}
-
+//SLOT1
 void SAWP() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  //wing.set(true); //add later
+  wing.set(true); //add later
 
   //move, loader-r2
   intake(-12, 12, 12);
-  driveTo(20, 2000, false);
+  driveTo(19.65, 1250, false); //change to true later if time permits
   fd.set(true);
   turnToAngle(90, 500);
 
   //collect 3B, loader-r2
-  driveTo(15.5, 700, true, 6.5); //15
-  wait(500, msec);
+  driveTo(16.25, 825, true, 6.5);
+  wait(350, msec);
 
   //score 4B, long-r2
-  driveTo(-28, 1250, true);
+  driveTo(-30, 1000, true);
   hood.set(true);
   fd.set(false);
-  wait(900, msec);
+  wait(600, msec); //650
 
   //collect 3B, loader-r2
-  turnToAngle(210, 1000);
+  turnToAngle(195, 750); //adjust to false if time needed
   hood.set(false);
-  driveTo(4, 1000, false);
+  moveToPoint(-3, 16, 1, 1000, false, 11);
+  moveToPoint(-2.5, -26, 1, 1000, false);
   fd.set(true);
-  driveTo(4, 1000, false);
+  driveTo(12, 2000);
   fd.set(false);
-  turnToAngle(-180, 500);
 
-/*
-  //score 3B, middle-low
-  it.interrupt();
-  intake(4, -10, -12);
-  driveTo(10, 1000);
-  intake(7, -7, 0);
+  //score 6B, long-r1
+  moveToPoint(16, -58.5, 1, 2500);
+  turnToAngle(-270, 250, false);
+  driveTo(-18, 800);
+  turnToAngle(-270, 500);
+  hood.set(true);
   wait(750, msec);
-  intake(0, 0, 0);
 
   //collect 3B, loader-r1
-  driveTo(-6, 1000, false);
-  turnToAngle(-180, 1000);
-  intake(-12, 12, 12);
-  driveTo(22, 2000, false);
   fd.set(true);
-  driveTo(10, 1000);
-  turnToAngle(135, 1000);
+  hood.set(false);
+  driveTo(31.5, 1500);
+  wait(250, msec);
 
   //score 3B, middle-high
-  driveTo(-15.5, 1000);
-  intake(12, -12, 12);
-  wait(100, msec);
-  intake(-12, 8, -6);
-  */
-}
-
-void LeftS() {
-  //calibrate
-  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  wing.set(true);
-
-  //drive to loader
-  intake(-12, 12, 12);
-  driveTo(24.5, 2000);
-  fd.set(true);
-  turnToAngle(-90, 1000);
-
-  //collect 3B, loader-r2
-  driveTo(15, 700, true, 5.5);
-  wait(225, msec);
-
-  //score 4B, long-r2
-  turnToAngle(-90, 1000);
-  driveTo(-21, 1000, true, 10.0);
-  hood.set(true);
+  moveToPoint(-15, -23, -1, 1500);
   intake(-12, -12, -12);
-  fd.set(false);
-  wait(50, msec);
-  intake(-12, 12, 12);
-  wait(1000, msec);
-
-  //collect 3B, loader-r2
-  intake(-12, 12, 12);
-  turnToAngle(-200, 750);
-  hood.set(false);
-  driveTo(4, 1000, false, 6.0);
-  fd.set(true);
-  driveTo(10, 1000);
-  fd.set(false);
-  turnToAngle(-45, 500);
-
-  //score 3B, middle-high
-  driveTo(-14.5, 3000, true, 8.0);
-  intake(-8, 8, -8);
-  wait(750, msec);
-  intake(0, 0, 0);
-
-  //wing control
-  driveTo(12.5, 1000);
-  wing.set(false);
-  swing(90, -1, 1000);
-  driveTo(5.5, 1000, false, 4.0);
-  turnToAngle(75, 1000);
-  stopChassis(hold);
+  wait(150, msec);
+  intake(-12, 12, -12);
 }
 
-void LeftF() {
-  //calibrate
-  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  wing.set(true);
+//SLOT2
+void Left4() {
 
-  //drive to loader
-  intake(-12, 12, 12);
-  driveTo(24.5, 2000);
-  fd.set(true);
-  turnToAngle(-90, 1000);
-
-  //collect 3B, loader-r2
-  driveTo(15, 700, true, 5.5);
-  wait(225, msec);
-
-  //score 4B, long-r2
-  turnToAngle(-90, 1000);
-  driveTo(-21, 1000, true, 10.0);
-  hood.set(true);
-  intake(-12, -12, -12);
-  fd.set(false);
-  wait(50, msec);
-  intake(-12, 12, 12);
-  wait(1000, msec);
-
-  //collect 3B, loader-r2
-  intake(-12, 12, 12);
-  turnToAngle(-200, 750);
-  hood.set(false);
-  driveTo(4, 1000, false, 6.0);
-  fd.set(true);
-  driveTo(10, 1000);
-  fd.set(false);
-  turnToAngle(-45, 500);
-
-  //score 3B, middle-high
-  driveTo(-14.5, 3000, true, 8.0);
-  intake(-8, 8, -8);
-  wait(750, msec);
-  intake(0, 0, 0);
-
-  //wing control
-  driveTo(12.5, 1000);
-  wing.set(false);
-  swing(90, -1, 1000);
-  driveTo(6, 1000, false, 8.0);
-  turnToAngle(75, 1000);
-  stopChassis(hold);
 }
 
-void RightS() {
-  //calibrate
-  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  wing.set(true);
-
-  //move, loader-r2
-  intake(-12, 12, 12);
-  driveTo(24.5, 2000);
-  fd.set(true);
-  turnToAngle(90, 500);
-
-  //collect 3B, loader-r2
-  driveTo(15, 700, true, 5.5);
-  wait(225, msec);
-
-  //score 4B, long-r2
-  turnToAngle(90, 1000);
-  driveTo(-21, 1000, true, 10.0);
-  hood.set(true);
-  intake(-12, -12, -12);
-  fd.set(false);
-  wait(50, msec);
-  intake(-12, 12, 12);
-  wait(1000, msec);
-
-  //collect 3B, loader-r2
-  intake(-12, 12, 12);
-  thread it = thread(intakeThread);
-  turnToAngle(200, 750);
-  hood.set(false);
-  driveTo(4, 1000, false, 6.0);
-  fd.set(true);
-  driveTo(10, 1000);
-  fd.set(false);
-  turnToAngle(-135, 500);
-
-  //score 3B, middle-low
-  it.interrupt();
-  intake(4, -10, -12);
-  driveTo(10, 1000);
-  intake(7, -7, 0);
-  wait(750, msec);
-  intake(0, 0, 0);
-
-  //wing control
-  driveTo(-12.5, 1000);
-  wing.set(false);
-  swing(90, -1, 1000);
-  driveTo(-5.5, 1000, false, 4.0);
-  turnToAngle(75, 1000);
-  stopChassis(hold);
-}
-
-void RightF() {
-  //calibrate
-  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
-  wing.set(true);
-
-  //move, loader-r2
-  intake(-12, 12, 12);
-  driveTo(24.5, 2000);
-  fd.set(true);
-  turnToAngle(90, 500);
-
-  //collect 3B, loader-r2
-  driveTo(15, 700, true, 5.5);
-  wait(240, msec);
-
-  //score 4B, long-r2
-  turnToAngle(90, 1000);
-  driveTo(-21, 1000, true, 10.0);
-  hood.set(true);
-  intake(-12, -12, -12);
-  fd.set(false);
-  wait(50, msec);
-  intake(-12, 12, 12);
-  wait(1000, msec);
-
-  //collect 3B, loader-r2
-  intake(-12, 12, 12);
-  thread it = thread(intakeThread);
-  turnToAngle(200, 750);
-  hood.set(false);
-  driveTo(4, 1000, false, 6.0);
-  fd.set(true);
-  driveTo(10, 1000);
-  fd.set(false);
-  turnToAngle(-135, 500);
-
-  //score 3B, middle-low
-  it.interrupt();
-  intake(4, -10, -12);
-  driveTo(10, 1000);
-  intake(7, -7, 0);
-  wait(750, msec);
-  intake(0, 0, 0);
-
-  //wing control
-  driveTo(-12.5, 1000);
-  wing.set(false);
-  swing(90, -1, 1000);
-  driveTo(-6, 1000, false, 8.0);
-  turnToAngle(75, 1000);
-  stopChassis(hold);
-}
-
-void RightF2() {
+//SLOT3
+void Right4() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
   //wing.set(true);
-
-  //move, loader-r2
+  
+  //
   intake(-12, 12, 12);
-  driveTo(24.5, 2000, true, 11.0);
+  moveToPoint(13, 23, 1, 1500, false);
   fd.set(true);
-  turnToAngle(90, 500);
-
-  //collect 3B, loader-r2
-  driveTo(15, 700, true, 5.0);
-  wait(200, msec);
-
-  //score 4B, long-r2
-  driveTo(-22, 1000, true, 10.0);
-  hood.set(true);
-  intake(-12, -12, -12);
-  fd.set(false);
-  wait(100, msec);
-  intake(-12, 12, 12);
-  wait(1000, msec);
-
-  //wing control
-  driveTo(4, 1000, false);
-  wing.set(false);
-  turnToAngle(45, 1000);
-  driveTo(-4.75, 1000, false);
-  turnToAngle(90, 1000);
-  driveTo(-14, 1300);
-  intake(0, 0, 0);
-  stopChassis(hold);
+  moveToPoint(50, 0, 1, 1000);
 }
 
+//SLOT4
+void Left7() {
+
+}
+
+//SLOT5
+void Right7() {
+
+}
+
+//SLOT6
+void Left34() {
+
+}
+
+//SLOT7
+void Right34() {
+
+}
+
+//SLOT8
 void Skills() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
@@ -528,6 +285,8 @@ void Skills() {
   driveTo(-2, 1000);
   driveTo(24, 2000, true, 10.0);
 }
+
+
 
 /*
 //color sorting?
