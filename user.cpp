@@ -6,28 +6,28 @@
 // Modify autonomous, driver, or pre-auton code below
 
 void runAutonomous() {
-  int auton_selected = 1;
+  int auton_selected = 7;
   switch(auton_selected) {
     case 1:
       SAWP();
       break;
     case 2:
-      LeftS();
+      Left4();
       break;  
     case 3:
-      LeftF();
+      Right4();
       break;
     case 4:
-      RightS();
+      Left7();
       break; 
     case 5:
-      RightF();
+      Right7();
       break;
     case 6:
-      RightF2();
+      Left34();
       break;
     case 7:
-      Seven_R();
+      Right34();
       break;
     case 8:
       Skills();
@@ -120,8 +120,8 @@ void runDriver() {
      wing.set(false);
    }
 
-
-   //hood controls
+   //hood controls - original
+   /*
    if (l2 && !l2_lastPressed) {
      l2_toggleState = !l2_toggleState;
    }
@@ -132,8 +132,15 @@ void runDriver() {
      hood.set(true);
    } else {
      hood.set(false);
-   }
+   }*/
 
+   
+   //hood controls - new
+   if (l2 == true) {
+    hood.set(true);
+   } else {
+    hood.set(false);
+   }
 
    //front dropper controls
    if (button_b && !b_lastPressed) {
@@ -259,6 +266,7 @@ void runPreAutonomous() {
 
   double current_heading = inertial_sensor.heading();
   Brain.Screen.print(current_heading);
+  
   Brain.Screen.print(x_pos);
   Brain.Screen.print(y_pos);
   
