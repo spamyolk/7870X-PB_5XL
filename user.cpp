@@ -6,7 +6,7 @@
 // Modify autonomous, driver, or pre-auton code below
 
 void runAutonomous() {
-  int auton_selected = 7;
+  int auton_selected = 8;
   switch(auton_selected) {
     case 1:
       SAWP();
@@ -24,10 +24,10 @@ void runAutonomous() {
       Right7();
       break;
     case 6:
-      Left34();
+      Left43();
       break;
     case 7:
-      Right34();
+      Right43();
       break;
     case 8:
       Skills();
