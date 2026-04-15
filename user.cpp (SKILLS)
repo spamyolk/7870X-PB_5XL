@@ -238,10 +238,10 @@ void runDriver() {
         intake(-12, 12, 12);
        } else if (r2 == true) {
         //intake to score middle
-        intake(-12, 3, -3);
+        intake(-12, 3.25, -3);
        } else if (l1 == true) {
         //outtake
-        intake(12, -12, -12);
+        intake(6, -12, -12);
        } else {
         intake(0, 0, 0); //stop
        }
