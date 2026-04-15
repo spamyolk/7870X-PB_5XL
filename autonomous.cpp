@@ -53,7 +53,7 @@ void Test() {
 
 
 
-//SLOT1
+//SLOT1, 8/10
 void SAWP() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
@@ -106,9 +106,33 @@ void SAWP() {
 
 //SLOT2
 void Left4() {
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true);
+  
+  //collect 3B, middle-low
+  intake(-12, 12, 12);
+  moveToPoint(-11, 22.5, 1, 1500, false);
+  fd.set(true);
+  moveToPoint(-13, 25.5, 1, 750, false);
+
+  //score 4B, long-r2
+  moveToPoint(-43 , 6, -1, 1500);
+  turnToAngle(180, 1000);
+  driveTo(-14, 1000);
+  hood.set(true);
+  wait(600, msec);
+  
+  //wing long-r2
+  moveToPoint(-32, 8, 1, 1000);
+  wing.set(false);
+  moveToPoint(-43, 34, 1, 2000, true, 6.0);
+  intake(0, 0, 0);
+  turnToAngle(45, 1000);
+  stopChassis(hold);
 }
 
-//SLOT3
+//SLOT3 10/10
 void Right4() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
@@ -121,16 +145,16 @@ void Right4() {
   moveToPoint(13, 25.5, 1, 750, false);
 
   //score 4B, long-r2
-  moveToPoint(42 , 6, -1, 1500);
+  moveToPoint(43 , 6, -1, 1500);
   turnToAngle(-180, 1000);
-  driveTo(-20, 1000);
+  driveTo(-14, 1000);
   hood.set(true);
   wait(600, msec);
   
   //wing long-r2
-  moveToPoint(31, 8, 1, 1000);
+  moveToPoint(32, 8, 1, 1000);
   wing.set(false);
-  moveToPoint(36, 32, -1, 2000, true, 6.0);
+  moveToPoint(43, 34, -1, 2000, true, 6.0);
   intake(0, 0, 0);
   turnToAngle(135, 1000);
   stopChassis(hold);
@@ -169,7 +193,7 @@ void Left7() {
   stopChassis(hold);
 }
 
-//SLOT5 OK, slight tuning for loader 3B?
+//SLOT5 9/10
 void Right7() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
@@ -203,7 +227,7 @@ void Right7() {
 }
 
 //SLOT6, OK NEED EDIT FOR WING
-void Left34() {
+void Left43() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
   wing.set(true); //add later
@@ -252,8 +276,8 @@ void Left34() {
   stopChassis(hold);
 }
 
-//SLOT7 OK, slightly tune distance for loader-r2/collecting 3B
-void Right34() {
+//SLOT7 8/10
+void Right43() {
   //calibrate
   correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
   wing.set(true); //add later
