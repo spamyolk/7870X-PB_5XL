@@ -1,284 +1,374 @@
 #include "vex.h"
+#include "utils.h"
+#include "pid.h"
+#include <ctime>
+#include <cmath>
+#include <thread>
+
+#include "../include/autonomous.h"
 #include "motor-control.h"
-#include "../custom/include/autonomous.h"
-#include "../custom/include/robot-config.h"
 
-// Modify autonomous, driver, or pre-auton code below
+// IMPORTANT: Remember to add respective function declarations to custom/include/autonomous.h
+// Call these functions from custom/include/user.cpp
+// Format: returnType functionName() { code }
+//color: 0 = default, 1 = red, 2 = blue
 
-void runAutonomous() {
-  int auton_selected = 8;
-  switch(auton_selected) {
-    case 1:
-      SAWP();
-      break;
-    case 2:
-      Left4();
-      break;  
-    case 3:
-      Right4();
-      break;
-    case 4:
-      Left7();
-      break; 
-    case 5:
-      Right7();
-      break;
-    case 6:
-      Left43();
-      break;
-    case 7:
-      Right43();
-      break;
-    case 8:
-      Skills();
-      break;
-    case 9:
-      PID_test();
-      break;
-  }
+void PID_test() {
+ // Use this for tuning linear
+ //driveTo(24, 2000);
+ //Use this for tuning turn
+ /*
+ turnToAngle(90, 2000);
+ wait(1, sec);
+ turnToAngle(180, 2000);
+ wait(1, sec);
+ turnToAngle(-360, 2000);
+ wait(1, sec);
+ turnToAngle(360, 2000);
+ wait(1, sec);
+ turnToAngle(0, 2000);
+ wait(1, sec);
+ */
 }
 
-// controller_1 input variables (snake_case)
-int ch1, ch2, ch3, ch4;
-bool l1, l2, r1, r2;
-bool button_a, button_b, button_x, button_y;
-bool button_up_arrow, button_down_arrow, button_left_arrow, button_right_arrow;
-int chassis_flag = 0;
+void intakeThread() {
+  optical_sensor.setLight(ledState::on);
+  optical_sensor.setLightPower(100);
+  while(!optical_sensor.isNearObject()) {
+    wait(10, msec);
+  }
+  intake(-8, -12, -12);
+  optical_sensor.setLight(ledState::off);
+}
 
-int colorGood(){
- //optical_sensor.setLight(ledState::on);      // Turn on optical sensor light
- //optical_sensor.setLightPower(100);          // Set light power to max
+void Test() {
+  /*
+  intake(-12, 12, 12);
+  thread it = thread(intakeThread);
+  wait(3, sec);
+  it.interrupt();
+  intake(12, -12, -12);
+  */
+}
 
+
+
+//SLOT1, 8/10
+void SAWP() {
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true); //add later
+
+  //move, loader-r2
+  intake(-12, 12, 12);
+  driveTo(19.65, 1250, false); //change to true later if time permits
+  fd.set(true);
+  turnToAngle(90, 500);
+
+  //collect 3B, loader-r2
+  driveTo(16.25, 825, true, 6.5);
+  wait(350, msec);
+
+  //score 4B, long-r2
+  driveTo(-30, 1000, true);
+  hood.set(true);
+  fd.set(false);
+  wait(600, msec); //650
+
+  //collect 3B, loader-r2
+  turnToAngle(195, 750); //adjust to false if time needed
+  hood.set(false);
+  moveToPoint(-3, 16, 1, 1000, false, 11);
+  moveToPoint(-2.5, -26, 1, 1000, false);
+  fd.set(true);
+  driveTo(12, 2000);
+
+  //score 6B, long-r1
+  moveToPoint(16, -58.5, 1, 2500);
+  turnToAngle(-270, 250, false);
+  driveTo(-18, 800);
+  turnToAngle(-270, 500);
+  hood.set(true);
+  wait(750, msec);
+
+  //collect 3B, loader-r1
+  hood.set(false);
+  driveTo(31.5, 1500);
+  wait(250, msec);
+
+  //score 3B, middle-high
+  moveToPoint(-15, -23, -1, 1500);
+  intake(-12, -12, -12);
+  wait(150, msec);
+  intake(-12, 12, -12);
+  stopChassis(hold);
+}
+
+//SLOT2
+void Left4() {
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true);
+  
+  //collect 3B, middle-low
+  intake(-12, 12, 12);
+  moveToPoint(-11, 22.5, 1, 1500, false);
+  fd.set(true);
+  moveToPoint(-13, 25.5, 1, 750, false);
+
+  //score 4B, long-r2
+  moveToPoint(-43 , 6, -1, 1500);
+  turnToAngle(180, 1000);
+  driveTo(-14, 1000);
+  hood.set(true);
+  wait(600, msec);
+  
+  //wing long-r2
+  moveToPoint(-32, 8, 1, 1000);
+  wing.set(false);
+  moveToPoint(-43, 34, 1, 2000, true, 6.0);
+  intake(0, 0, 0);
+  turnToAngle(45, 1000);
+  stopChassis(hold);
+}
+
+//SLOT3 10/10
+void Right4() {
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true);
+  
+  //collect 3B, middle-low
+  intake(-12, 12, 12);
+  moveToPoint(11, 22.5, 1, 1500, false);
+  fd.set(true);
+  moveToPoint(13, 25.5, 1, 750, false);
+
+  //score 4B, long-r2
+  moveToPoint(43 , 6, -1, 1500);
+  turnToAngle(-180, 1000);
+  driveTo(-14, 1000);
+  hood.set(true);
+  wait(600, msec);
+  
+  //wing long-r2
+  moveToPoint(32, 8, 1, 1000);
+  wing.set(false);
+  moveToPoint(43, 34, -1, 2000, true, 6.0);
+  intake(0, 0, 0);
+  turnToAngle(135, 1000);
+  stopChassis(hold);
+}
+
+//SLOT4 OK, tuning for wing control**
+void Left7() {
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true);
+  
+  //collect 3B, middle-low
+  intake(-12, 12, 12);
+  moveToPoint(-11.25, 18.5, 1, 1500, false); //11, 22.5
+  fd.set(true);
+  moveToPoint(-13.25, 21.5, 1, 750, false); //13, 25.5
+
+
+  //collect 3B, loader-r2
+  moveToPoint(-30, 3, 1, 1000, false); //48, 4
+  turnToAngle(-180, 500);
+  driveTo(16.25, 825, true, 6.5); //16.25
+  wait(175, msec);
+
+  //score 7B, long-r2
+  driveTo(-29.5, 1000, true);
+  hood.set(true);
+  fd.set(false);
+  wait(1000, msec);
+
+  //wing, long-r2 EDIT THIS
+  moveToPoint(-20, 14, 1, 1000);
+  wing.set(false);
+  turnToAngle(0, 1000);
+  driveTo(30, 1000, true, 8.0);
+  intake(0, 0, 0);
+  turnToAngle(45, 1000);
+  stopChassis(hold);
+}
+
+//SLOT5 9/10
+void Right7() {
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true);
+  
+  //collect 3B, middle-low
+  intake(-12, 12, 12);
+  moveToPoint(11, 22.5, 1, 1500, false);
+  fd.set(true);
+  moveToPoint(13, 25.5, 1, 750, false);
+
+  //collect 3B, loader-r2
+  moveToPoint(48, 4, 1, 1000, false);
+  turnToAngle(180, 500);
+  driveTo(16.25, 825, true, 6.5);
+  wait(175, msec);
+
+  //score 7B, long-r2
+  driveTo(-30, 1000, true);
+  hood.set(true);
+  fd.set(false);
+  wait(1000, msec);
+
+  //wing, long-r2
+  moveToPoint(31, 8, 1, 1000);
+  wing.set(false);
+  moveToPoint(39, 32, -1, 2000, true, 6.0);
+  intake(0, 0, 0);
+  turnToAngle(130, 1000);
+  stopChassis(hold);
+}
+
+//SLOT6, OK NEED EDIT FOR WING
+void Left43() {
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true); //add later
+
+  //move, loader-r2
+  intake(-12, 12, 12);
+  driveTo(19.65, 1250, false); //change to true later if time permits
+  fd.set(true);
+  turnToAngle(-90, 500);
+
+  //collect 3B, loader-r2
+  driveTo(16.25, 825, true, 6.5);
+  wait(300, msec);
+
+  //score 4B, long-r2
+  driveTo(-30, 1000, true);
+  hood.set(true);
+  fd.set(false);
+  wait(600, msec);
+  thread it = thread(intakeThread);
+
+  //collect 3B, loader-r2
+  turnToAngle(195, 750); //adjust angle
+  hood.set(false);
+  driveTo(4, 1000, false, 6.0);
+  fd.set(true);
+  driveTo(12, 1000);
+  fd.set(false);
+  turnToAngle(-135, 500);
+  hood.set(false);
+
+  //score 3B, middle-low
+  it.interrupt();
+  intake(4, -10, -12);
+  driveTo(16, 1000);
+  intake(12, -12, 0);
+  wait(750, msec);
+  intake(0, 0, 0);
+
+  //wing control, long-r2
+  driveTo(-18, 1500);
+  wing.set(false);
+  swing(90, -1, 1000);
+  driveTo(-10, 1000, false, 6.0);
+  turnToAngle(45, 1000);
+  stopChassis(hold);
+}
+
+//SLOT7 8/10
+void Right43() {
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true); //add later
+
+  //move, loader-r2
+  intake(-12, 12, 12);
+  driveTo(19.65, 1250, false); //change to true later if time permits
+  fd.set(true);
+  turnToAngle(90, 500);
+
+  //collect 3B, loader-r2
+  driveTo(16.25, 825, true, 6.5);
+  wait(300, msec);
+
+  //score 4B, long-r2
+  driveTo(-30, 1000, true);
+  hood.set(true);
+  fd.set(false);
+  wait(600, msec);
+  thread it = thread(intakeThread);
+
+  //collect 3B, loader-r2
+  turnToAngle(195, 750); //adjust to false if time needed
+  hood.set(false);
+  driveTo(4, 1000, false, 6.0);
+  fd.set(true);
+  driveTo(12, 1000);
+  fd.set(false);
+  turnToAngle(-135, 500);
+  hood.set(false);
+
+  //score 3B, middle-low
+  it.interrupt();
+  intake(4, -10, -12);
+  driveTo(16, 1000);
+  intake(12, -12, 0);
+  wait(750, msec);
+  intake(0, 0, 0);
+
+  //wing control, long-r2
+  driveTo(-18, 1500);
+  wing.set(false);
+  swing(90, -1, 1000);
+  driveTo(-10, 1000, false, 6.0);
+  turnToAngle(45, 1000);
+  stopChassis(hold);
+}
+
+//SLOT8
+void Skills() {
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  //wing.set(true);
+  
+  //move
+  //calibrate
+  correct_angle = inertial_sensor.rotation(); //correct angle variable to inertial sensor
+  wing.set(true);
+  
+  //collect 3B, middle-low
+  intake(-12, 12, 12);
+  moveToPoint(11, 22.5, 1, 1500, false, 8);
+  fd.set(true);
+  moveToPoint(13, 25.5, 1, 750, false, 8);
+  turnToAngle(-45, 1000);
+  driveTo(12, 1000);
+  intake(6, -12, 0);
+
+  moveToPoint(42, 0, -1, 1000, 8);
+}
+
+
+
+/*
+//color sorting?
+void colorGood(){
+ optical_sensor.setLight(ledState::on);      // Turn on optical sensor light
+ optical_sensor.setLightPower(100);          // Set light power to max
+ int color1 = 0;
 
  while(true) {
    if (optical_sensor.color() == red) {
-     return 1;
+     color1 = 1;
    } else if (optical_sensor.color() == blue) {
-     return 2;
+     color1 = 2;
    } else {
-     return 0;
+     color1 = 0;
    }
    wait(10, msec);
  }
 }
-
-
-void runDriver() {
- stopChassis(coast);
- heading_correction = false;
- //other personal vars
- int driver_selected = 3;
- //bool x_toggleState = false;
- //bool x_lastPressed = false;
- //bool a_toggleState = false;
- //bool a_lastPressed = false;
- bool b_toggleState = false;
- bool b_lastPressed = false;
- bool down_toggleState = false;
- bool down_lastPressed = false;
- bool l2_toggleState = false;
- bool l2_lastPressed = false;
-
- while (true) {
-   thread cg = thread(colorGood);
-  
-   // [-100, 100] for controller stick axis values
-   ch1 = controller_1.Axis1.value();
-   ch2 = controller_1.Axis2.value();
-   ch3 = controller_1.Axis3.value();
-   ch4 = controller_1.Axis4.value();
-
-
-   // true/false for controller button presses
-   l1 = controller_1.ButtonL1.pressing();
-   l2 = controller_1.ButtonL2.pressing();
-   r1 = controller_1.ButtonR1.pressing();
-   r2 = controller_1.ButtonR2.pressing();
-   //button_a = controller_1.ButtonA.pressing();
-   button_b = controller_1.ButtonB.pressing();
-   //button_x = controller_1.ButtonX.pressing();
-   button_y = controller_1.ButtonY.pressing();
-   button_up_arrow = controller_1.ButtonUp.pressing();
-   button_down_arrow = controller_1.ButtonDown.pressing();
-   button_left_arrow = controller_1.ButtonLeft.pressing();
-   button_right_arrow = controller_1.ButtonRight.pressing();
-
-
-   // default tank drive or replace it with your preferred driver code here:
-   driveChassis(ch3 * 0.12, ch2 * 0.12); //0.12
-
-   //wing controls
-   if (button_down_arrow && !down_lastPressed) {
-     down_toggleState = !down_toggleState;
-   }
-   down_lastPressed = button_down_arrow;
-
-
-   if (down_toggleState) {
-     wing.set(true);
-   } else {
-     wing.set(false);
-   }
-
-   //hood controls - original
-   /*
-   if (l2 && !l2_lastPressed) {
-     l2_toggleState = !l2_toggleState;
-   }
-   l2_lastPressed = l2;
-
-
-   if (l2_toggleState) {
-     hood.set(true);
-   } else {
-     hood.set(false);
-   }*/
-
-   
-   //hood controls - new
-   if (l2 == true) {
-    hood.set(true);
-   } else {
-    hood.set(false);
-   }
-
-   //front dropper controls
-   if (button_b && !b_lastPressed) {
-     b_toggleState = !b_toggleState;
-   }
-   b_lastPressed = button_b;
-
-
-   if (b_toggleState) {
-     fd.set(true);
-   } else {
-     fd.set(false);
-   }
-
-   switch (driver_selected) {
-     case 1:
-       //red intake controls
-       if (r1 == true) {
-         //intake to score tall/capacity
-         if (colorGood() == 1) {
-           intake_motor1.spin(fwd, -12, volt);
-           intake_motor2.spin(fwd, 12, volt);
-           intake_motor3.spin(fwd, 12, volt);
-         } else {
-           intake_motor1.spin(fwd, -12, volt);
-           intake_motor2.spin(fwd, 12, volt);
-           intake_motor3.spin(fwd, -12, volt);
-         }
-       } else if (r2 == true) {
-         //intake to score middle
-         if (colorGood() == 1) {
-           intake_motor1.spin(fwd, -12, volt);
-           intake_motor2.spin(fwd, 12, volt);
-           intake_motor3.spin(fwd, -12, volt);
-         } else {
-           intake_motor1.spin(fwd, -12, volt);
-           intake_motor2.spin(fwd, 12, volt);
-           intake_motor3.spin(fwd, 12, volt);
-         }
-       } else if (l1 == true) {
-         //outtake
-         intake_motor1.spin(fwd, 12, volt);
-         intake_motor2.spin(fwd, -12, volt);
-         intake_motor3.spin(fwd, -12, volt);
-       } else {
-         intake_motor1.stop();
-         intake_motor1.setStopping(coast);
-         intake_motor2.stop();
-         intake_motor2.setStopping(coast);
-         intake_motor3.stop();
-         intake_motor3.setStopping(coast);
-       }
-
-
-       wait(10, msec);
-       break;
-    
-     case 2:
-       //blue intake controls
-       if (r1 == true) {
-         //intake to score tall/capacity
-         if (colorGood() == 2) {
-           intake_motor1.spin(fwd, -12, volt);
-           intake_motor2.spin(fwd, 12, volt);
-           intake_motor3.spin(fwd, 12, volt);
-         } else {
-           intake_motor1.spin(fwd, -12, volt);
-           intake_motor2.spin(fwd, 12, volt);
-           intake_motor3.spin(fwd, -12, volt);
-         }
-       } else if (r2 == true) {
-         //intake to score middle
-         if (colorGood() == 2) {
-           intake(-12, 12, -12);
-         } else {
-           intake(-12, 12, 12);
-         }
-       } else if (l1 == true) {
-         //outtake
-         intake(12, -12, -12);
-       } else {
-         intake(0, 0, 0); //stop
-       }
-
-
-       wait(10, msec);
-       break;
-
-
-     case 3:
-       //normal intake controls
-       if (r1 == true) {
-        //intake to score tall/capacity
-        intake(-12, 12, 12);
-       } else if (r2 == true) {
-        //intake to score middle
-        intake(-12, 12, -12);
-       } else if (l1 == true) {
-        //outtake
-        intake(12, -12, -12);
-       } else {
-        intake(0, 0, 0); //stop
-       }
-
-
-       wait(10, msec);
-       break;
-     }
- }
-}
-
-void runPreAutonomous() {
-    // Initializing Robot Configuration. DO NOT REMOVE!
-  vexcodeInit();
-  
-  // Calibrate inertial sensor
-  inertial_sensor.calibrate();
-
-  // Wait for the Inertial Sensor to calibrate
-  while (inertial_sensor.isCalibrating()) {
-    wait(10, msec);
-  }
-
-  double current_heading = inertial_sensor.heading();
-  Brain.Screen.print(current_heading);
-  
-  Brain.Screen.print(x_pos);
-  Brain.Screen.print(y_pos);
-  
-  // odom tracking
-  resetChassis();
-  if(using_horizontal_tracker && using_vertical_tracker) {
-    thread odom = thread(trackXYOdomWheel);
-  } else if (using_horizontal_tracker) {
-    thread odom = thread(trackXOdomWheel);
-  } else if (using_vertical_tracker) {
-    thread odom = thread(trackYOdomWheel);
-  } else {
-    thread odom = thread(trackNoOdomWheel);
-  }
-}
+*/
