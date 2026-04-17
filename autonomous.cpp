@@ -177,7 +177,7 @@ void Left7() {
   moveToPoint(-30, 3, 1, 1000, false); //48, 4
   turnToAngle(-180, 500);
   driveTo(16.25, 825, true, 6.5); //16.25
-  wait(175, msec);
+  wait(225, msec);
 
   //score 7B, long-r2
   driveTo(-29.5, 1000, true);
@@ -189,7 +189,7 @@ void Left7() {
   moveToPoint(-20, 14, 1, 1000);
   wing.set(false);
   turnToAngle(0, 1000);
-  driveTo(30, 1000, true, 8.0);
+  driveTo(28, 1000, true, 8.0);
   intake(0, 0, 0);
   turnToAngle(45, 1000);
   stopChassis(hold);
@@ -236,45 +236,44 @@ void Left43() {
 
   //move, loader-r2
   intake(-12, 12, 12);
-  driveTo(19.65, 1250, false); //change to true later if time permits
+  driveTo(21.5, 1250, false); //change to true later if time permits
   fd.set(true);
   turnToAngle(-90, 500);
 
   //collect 3B, loader-r2
-  driveTo(16.25, 825, true, 6.5);
+  driveTo(16.5, 825, true, 6.5);
   wait(300, msec);
 
   //score 4B, long-r2
   driveTo(-30, 1000, true);
   hood.set(true);
   fd.set(false);
-  wait(600, msec);
-  thread it = thread(intakeThread);
+  wait(1000, msec);
 
-  //collect 3B, loader-r2
-  turnToAngle(195, 750); //adjust angle
+  //collect 3B, loader-l2
+  turnToAngle(-195, 750); //adjust angle
   hood.set(false);
   driveTo(4, 1000, false, 6.0);
   fd.set(true);
   driveTo(12, 1000);
-  fd.set(false);
-  turnToAngle(-135, 500);
+  turnToAngle(-42, 500);
   hood.set(false);
 
-  //score 3B, middle-low
-  it.interrupt();
-  intake(4, -10, -12);
-  driveTo(16, 1000);
-  intake(12, -12, 0);
-  wait(750, msec);
+  //score 3B, middle-high
+  driveTo(-19, 1000);
+  intake(12, -12, -12);
+  wait(150, msec);
+  intake(-12, 12, -12);
+  wait(1000, msec);
+  fd.set(false);
   intake(0, 0, 0);
 
-  //wing control, long-r2
-  driveTo(-18, 1500);
+  //wing control, long-l2
+  driveTo(19, 1500);
   wing.set(false);
-  swing(90, -1, 1000);
-  driveTo(-10, 1000, false, 6.0);
-  turnToAngle(45, 1000);
+  swing(90, 1, 1000);
+  driveTo(10, 1000, false, 6.0);
+  turnToAngle(135, 1000);
   stopChassis(hold);
 }
 
