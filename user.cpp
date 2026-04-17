@@ -12,25 +12,23 @@ void runAutonomous() {
       SAWP();
       break;
     case 2:
-      Left4();
+      Left7();
       break;  
     case 3:
-      Right4();
-      break;
-    case 4:
-      Left7();
-      break; 
-    case 5:
       Right7();
       break;
-    case 6:
+    case 4:
       Left43();
-      break;
-    case 7:
+      break; 
+    case 5:
       Right43();
       break;
-    case 8:
+    case 6:
       Skills();
+      break;
+    case 7:
+      break;
+    case 8:
       break;
     case 9:
       PID_test();
