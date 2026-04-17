@@ -6,7 +6,7 @@
 // Modify autonomous, driver, or pre-auton code below
 
 void runAutonomous() {
-  int auton_selected = 4;
+  int auton_selected = 1;
   switch(auton_selected) {
     case 1:
       SAWP();
@@ -75,8 +75,8 @@ void runDriver() {
  bool b_lastPressed = false;
  bool down_toggleState = false;
  bool down_lastPressed = false;
- bool l2_toggleState = false;
- bool l2_lastPressed = false;
+ //bool l2_toggleState = false;
+ //bool l2_lastPressed = false;
 
  while (true) {
    thread cg = thread(colorGood);
