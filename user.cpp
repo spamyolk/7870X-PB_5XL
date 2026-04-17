@@ -120,7 +120,7 @@ void runDriver() {
    }
 
    //hood controls - original
-   
+   /*
    if (l2 && !l2_lastPressed) {
      l2_toggleState = !l2_toggleState;
    }
@@ -131,15 +131,16 @@ void runDriver() {
      hood.set(true);
    } else {
      hood.set(false);
-   }
+   }*/
 
-   /*
+   
    //hood controls - new
+
    if (l2 == true) {
     hood.set(true);
    } else {
     hood.set(false);
-   }*/
+   }
 
    //front dropper controls
    if (button_b && !b_lastPressed) {
@@ -236,10 +237,10 @@ void runDriver() {
         intake(-12, 12, 12);
        } else if (r2 == true) {
         //intake to score middle
-        intake(-12, 3.25, -3);
+        intake(-12, 12, -12);
        } else if (l1 == true) {
         //outtake
-        intake(6, -12, -12);
+        intake(12, -12, -12);
        } else {
         intake(0, 0, 0); //stop
        }
