@@ -285,41 +285,44 @@ void Right43() {
 
   //move, loader-r2
   intake(-12, 12, 12);
-  driveTo(19.65, 1250, false); //change to true later if time permits
+  driveTo(24.5, 1250, false); //change to true later if time permits
   fd.set(true);
   turnToAngle(90, 500);
 
   //collect 3B, loader-r2
-  driveTo(16.25, 825, true, 6.5);
+  driveTo(17, 825, true, 6.5);
   wait(300, msec);
 
   //score 4B, long-r2
   driveTo(-30, 1000, true);
   hood.set(true);
+  intake(12, -12, -12);
+  wait(100, msec);
   fd.set(false);
-  wait(600, msec);
+  intake(-12, 12, 12);
+  wait(1000, msec);
   thread it = thread(intakeThread);
 
   //collect 3B, loader-r2
-  turnToAngle(195, 750); //adjust to false if time needed
+  turnToAngle(195, 750, false); //adjust to false if time needed
   hood.set(false);
-  driveTo(4, 1000, false, 6.0);
+  driveTo(6, 1000, false, 9.0);
   fd.set(true);
   driveTo(12, 1000);
   fd.set(false);
-  turnToAngle(-135, 500);
+  turnToAngle(-130, 500);
   hood.set(false);
 
   //score 3B, middle-low
   it.interrupt();
   intake(4, -10, -12);
-  driveTo(16, 1000);
+  driveTo(18, 1000);
   intake(12, -12, 0);
   wait(750, msec);
   intake(0, 0, 0);
 
   //wing control, long-r2
-  driveTo(-18, 1500);
+  driveTo(-19.5, 1500);
   wing.set(false);
   swing(90, -1, 1000);
   driveTo(-10, 1000, false, 6.0);
